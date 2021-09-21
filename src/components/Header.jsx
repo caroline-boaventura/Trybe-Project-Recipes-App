@@ -4,26 +4,27 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function Header(props) {
-  const { title } = props;
+  const { title, visibility } = props;
   return (
     <div>
       <button
         type="button"
-        data-testid="profile-top-btn"
       >
-        <img src={ profileIcon } alt="profile-icon" />
+        <img data-testid="profile-top-btn" src={ profileIcon } alt="profile-icon" />
       </button>
       <h1 data-testid="page-title">{ title }</h1>
-      <button
-        type="button"
-        data-testid="search-top-btn"
-      >
-        <img src={ searchIcon } alt="search-icon" />
-      </button>
+      { visibility ? (
+        <button
+          type="button"
+        >
+          <img data-testid="search-top-btn" src={ searchIcon } alt="search-icon" />
+        </button>
+      ) : null }
     </div>
   );
 }
 
 Header.propTypes = ({
   title: PropTypes.string.isRequired,
+  visibility: PropTypes.bool.isRequired,
 });
