@@ -1,11 +1,17 @@
-import React from 'react';
-import { Header } from '../components/index';
+import React, { useState } from 'react';
+import { Header, Search } from '../components/index';
 
 export default function Foods() {
+  const [searchBar, setSearchBar] = useState(false);
+
+  const headleSearchBar = () => {
+    setSearchBar(!searchBar);
+  };
+
   return (
     <div>
-      <Header title="Comidas" visibility />
-      <h1>Comidas</h1>
+      <Header title="Comidas" visibility headleSearchBar={ headleSearchBar } />
+      { searchBar ? <Search /> : null }
     </div>
   );
 }

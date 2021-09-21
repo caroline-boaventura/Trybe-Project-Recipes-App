@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory as UseHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import { Search } from '.';
 
 export default function Header(props) {
-  const [searchBar, setSearchBar] = useState(false);
-  const { title, visibility } = props;
+  const { title, visibility, headleSearchBar } = props;
   const history = UseHistory();
-
-  const headleSearchBar = () => {
-    setSearchBar(!searchBar);
-  };
 
   const profile = () => {
     history.push('/perfil');
@@ -35,7 +29,6 @@ export default function Header(props) {
           <img data-testid="search-top-btn" src={ searchIcon } alt="search-icon" />
         </button>
       ) : null }
-      { searchBar ? <Search /> : null }
     </div>
   );
 }
@@ -43,4 +36,5 @@ export default function Header(props) {
 Header.propTypes = ({
   title: PropTypes.string.isRequired,
   visibility: PropTypes.bool.isRequired,
+  headleSearchBar: PropTypes.func.isRequired,
 });
