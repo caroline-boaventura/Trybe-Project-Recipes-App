@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import { Login } from './components';
+import { Login, Foods, Drinks } from './components';
 
 function App() {
   useEffect(() => {
@@ -14,6 +14,8 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/bebidas" component={ Drinks } />
+        <Route path="/comidas" component={ Foods } />
         <Route exact path="/" component={ Login } />
       </Switch>
     </BrowserRouter>
