@@ -1,7 +1,8 @@
 import React from 'react';
+import { Header } from '../components/index';
 
 export default function Drinks() {
   return (
-    <h1>Drinks</h1>
+    <Header title="Bebidas" visibility />
   );
 }

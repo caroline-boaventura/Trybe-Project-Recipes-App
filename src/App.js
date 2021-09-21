@@ -16,7 +16,8 @@ import {
   ExploreFoodByOrigin,
   User,
   DoneRecipes,
-  FavoriteRecipes } from './pages';
+  FavoriteRecipes,
+  EspecificDrinkProgress } from './pages';
 
 function App() {
   return (
@@ -32,7 +33,11 @@ function App() {
           path="/comidas/:id/in-progress"
           component={ EspecificFoodProgress }
         />
-        <Route exact path="/bebidas/:id/in-progress" component={ Foods } />
+        <Route
+          exact
+          path="/bebidas/:id/in-progress"
+          component={ EspecificDrinkProgress }
+        />
         <Route exact path="/explorar" component={ ExploreAll } />
         <Route exact path="/explorar/comidas" component={ ExploreFoods } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />

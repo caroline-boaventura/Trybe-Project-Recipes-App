@@ -1,7 +1,8 @@
 import React from 'react';
+import { Header } from '../components/index';
 
 export default function DoneRecipes() {
   return (
-    <h1>Receitas Feitas</h1>
+    <Header title="Receitas Feitas" visibility={ false } />
   );
 }
