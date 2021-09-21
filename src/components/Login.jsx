@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory as UseHistory } from 'react-router-dom';
 
-function handleChange(event) {
-  this.setState({ [event.target.name]: event.target.value }, () => {
-    const { email, password, valid } = this.state;
+export default function Login() {
+  const history = UseHistory();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [valid, setValid] = useState(false);
+
+  function handleClick() {
+    const user = { email };
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+    localStorage.setItem('user', JSON.stringify(user));
+    history.push('/comidas');
+  }
+
+  function isValid() {
     const regex = /(.)(.*)@(.)(.*)\.(...)(.*)/;
     const passNum = 6;
     if (email.match(regex) && password.length >= passNum && valid === false) {
-      this.setState({ valid: true });
+      setValid(true);
     }
-  });
-}
+  }
 
-export default function Login() {
+  function handleChangeEmail(event) {
+    setEmail(event.target.value);
+    isValid();
+  }
+
+  function handleChangePassword(event) {
+    setPassword(event.target.value);
+    isValid();
+  }
   return (
     <div className="login-panel">
       <form>
@@ -21,7 +41,7 @@ export default function Login() {
             data-testid="email-input"
             type="email"
             name="email"
-            onChange={ () => handleChange() }
+            onChange={ (e) => handleChangeEmail(e) }
           />
         </label>
         <label htmlFor="password">
@@ -30,10 +50,20 @@ export default function Login() {
             data-testid="password-input"
             type="password"
             name="password"
-            onChange={ () => handleChange() }
+            onChange={ (e) => handleChangePassword(e) }
           />
         </label>
-        <button data-testid="login-submit-btn" type="button">Entrar</button>
+        {valid
+          ? (
+            <button
+              data-testid="login-submit-btn"
+              type="button"
+              onClick={ () => handleClick() }
+            >
+              Entrar
+
+            </button>)
+          : <button disabled data-testid="login-submit-btn" type="button">Entrar</button>}
       </form>
     </div>
   );
