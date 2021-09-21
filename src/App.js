@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-<<<<<<< HEAD
-import { Login, Foods, Drinks } from './components';
-=======
 import {
   Login,
   Foods,
@@ -21,7 +18,6 @@ import {
   DoneRecipes,
   FavoriteRecipes,
   EspecificDrinkProgress } from './pages';
->>>>>>> 31282ff4155c5f665a3cf51db5fea8082f0f8890
 
 function App() {
   return (
