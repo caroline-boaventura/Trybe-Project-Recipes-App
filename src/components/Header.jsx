@@ -9,6 +9,7 @@ export default function Header(props) {
   const history = UseHistory();
 
   const profile = () => {
+    console.log(history);
     history.push('/perfil');
   };
 
@@ -20,7 +21,7 @@ export default function Header(props) {
       >
         <img data-testid="profile-top-btn" src={ profileIcon } alt="profile-icon" />
       </button>
-      <h1 data-testid="page-title">{ title }</h1>
+      <h1 id={ title } data-testid="page-title">{ title }</h1>
       { visibility ? (
         <button
           type="button"

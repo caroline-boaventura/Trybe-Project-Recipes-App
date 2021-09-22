@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import MyConText from '../context/Context';
 
 export default function Search() {
+  const { FetchAPI } = useContext(MyConText);
   return (
     <div>
-      <input data-testid="search-input" />
+      <input id="search" data-testid="search-input" />
 
       <label htmlFor="ingredient-search-radio">
         ingredient
@@ -40,6 +42,7 @@ export default function Search() {
       <button
         type="button"
         data-testid="exec-search-btn"
+        onClick={ () => FetchAPI() }
       >
         procurar?
       </button>
