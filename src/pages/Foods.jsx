@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Header, Search } from '../components/index';
+import { Header, Search, Footer } from '../components/index';
 
 export default function Foods() {
   const [searchBar, setSearchBar] = useState(false);
@@ -16,6 +16,7 @@ export default function Foods() {
         headleSearchBar={ headleSearchBar }
       />
       { searchBar ? <Search /> : null }
+      <Footer />
     </div>
   );
 }

@@ -1,8 +1,11 @@
 import React from 'react';
-import { Header } from '../components/index';
+import { Header, Footer } from '../components/index';
 
 export default function ExploreFoodsByOrigin() {
   return (
-    <Header title="Explorar Origem" visibility />
+    <div>
+      <Header title="Explorar Origem" visibility />
+      <Footer />
+    </div>
   );
 }

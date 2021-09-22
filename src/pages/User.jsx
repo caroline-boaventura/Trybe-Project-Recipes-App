@@ -1,8 +1,11 @@
 import React from 'react';
-import { Header } from '../components/index';
+import { Header, Footer } from '../components/index';
 
 export default function User() {
   return (
-    <Header title="Perfil" visibility={ false } />
+    <div>
+      <Header title="Perfil" visibility={ false } />
+      <Footer />
+    </div>
   );
 }
