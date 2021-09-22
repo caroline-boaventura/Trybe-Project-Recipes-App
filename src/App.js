@@ -23,11 +23,11 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/bebidas" component={ Drinks } />
-        <Route path="/comidas" component={ Foods } />
         <Route exact path="/" component={ Login } />
         <Route path="/comidas/:id" component={ EspecificFood } />
         <Route path="/bebidas/:id" component={ EspecificDrink } />
+        <Route path="/bebidas" component={ Drinks } />
+        <Route path="/comidas" component={ Foods } />
         <Route exact path="/comidas" component={ Foods } />
         <Route exact path="/bebidas" component={ Drinks } />
         <Route
