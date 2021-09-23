@@ -10,7 +10,11 @@ export default function Foods() {
 
   return (
     <div>
-      <Header title="Comidas" visibility headleSearchBar={ headleSearchBar } />
+      <Header
+        title="Comidas"
+        visibility
+        headleSearchBar={ headleSearchBar }
+      />
       { searchBar ? <Search /> : null }
       <Footer />
     </div>
