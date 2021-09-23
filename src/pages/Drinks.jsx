@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Header, Search, Footer } from '../components/index';
+import { Header, Search, Footer, Categories, RecipeCard } from '../components/index';
 
 export default function Drinks() {
   const [searchBar, setSearchBar] = useState(false);
@@ -15,7 +15,9 @@ export default function Drinks() {
         visibility
         headleSearchBar={ headleSearchBar }
       />
-      { searchBar ? <Search /> : null }
+      { searchBar
+        ? <Search /> : <Categories nameApi="thecocktaildb" drinkOrMeals="drinks" /> }
+      <RecipeCard nameApi="thecocktaildb" drinkOrMeals="drinks" imgAndTitle="Drink" />
       <Footer />
     </div>
   );

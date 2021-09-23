@@ -13,15 +13,14 @@ function Provider({ children }) {
       const ingrediente = document.getElementById('search').value;
       console.log('checked');
       fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingrediente}`)
-      .then((response) => response.json())
-      .then(function(res) {
-        console.log(res);
-        setMealState(res);
-        if (res.meals === null) {
-          global.alert(alert);
-        }
-        console.log(mealState);
-      })
+        .then((response) => response.json())
+        .then(function(res) {
+          setMealState(res);
+          if (res.meals === null) {
+            global.alert(alert);
+          }
+          console.log(mealState);
+        })
       
     } else if (document.getElementById('name-search-radio').checked) {
       const name = document.getElementById('search').value;
@@ -103,6 +102,7 @@ function Provider({ children }) {
   }
 
   const Context = { FetchAPI };
+
   return (
     <MyConText.Provider value={ Context }>
       { children }
