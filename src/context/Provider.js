@@ -1,35 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import MyConText from './Context';
 
 function Provider({ children }) {
+
+  const [mealState, setMealState] = useState([]);
+  const [drinkState, setDrinkState] = useState([]);
+
   const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
   async function MealFunction() {
     if (document.getElementById('ingredient-search-radio').checked) {
       const ingrediente = document.getElementById('search').value;
       console.log('checked');
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingrediente}`);
-      const responsejson = response.json();
-      console.log(responsejson);
-      if (responsejson.meals !== true) {
-        global.alert(alert);
-      }
+      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingrediente}`)
+      .then((response) => response.json())
+      .then(function(res) {
+        console.log(res);
+        setMealState(res);
+        if (res.meals === null) {
+          global.alert(alert);
+        }
+        console.log(mealState);
+      })
+      
     } else if (document.getElementById('name-search-radio').checked) {
       const name = document.getElementById('search').value;
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
-      const responsejson = await response.json();
-      if (responsejson.meals !== true) {
+      fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
+      .then((response) => response.json())
+      .then(function(res) {
+        setMealState(res); 
+        if (res.meals.length === 1) {
+          setMealState(res);
+          console.log(res, "APARECE") 
+          window.location.href = `/comidas/${res.meals[0].idMeal}`;
+        };
+       if (res.meals === null) {
         global.alert(alert);
-      } else if (responsejson.meals.length === 1) {
-        window.location.href = `/comidas/${responsejson.meals[0].idMeal}`;
-      }
+      }});
+
     } else if (document.getElementById('first-letter-search-radio').checked) {
       if (document.getElementById('search').value.length > 1) {
         global.alert('Sua busca deve conter somente 1 (um) caracter');
       } else {
         const fl = document.getElementById('search').value;
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${fl}`);
-        const responsejson = response.json();
+        const responsejson = await response.json();
         console.log(responsejson);
         if (responsejson.meals !== true) {
           global.alert(
@@ -45,7 +60,9 @@ function Provider({ children }) {
       const ingrediente = document.getElementById('search').value;
       console.log('checked');
       const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingrediente}`);
-      const responsejson = response.json();
+      const responsejson = await response.json();
+
+      setDrinkState(responsejson);
       console.log(responsejson);
       if (responsejson.drinks !== true) {
         global.alert(alert);
@@ -66,7 +83,7 @@ function Provider({ children }) {
       } else {
         const fl = document.getElementById('search').value;
         const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${fl}`);
-        const responsejson = response.json();
+        const responsejson = await response.json();
         console.log(responsejson);
         if (responsejson.drinks !== true) {
           global.alert(
