@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Header, Search, Footer, Categories, RecipeCard } from '../components/index';
+import RenderFoods from '../components/RenderFoods';
 
 export default function Foods() {
   const [searchBar, setSearchBar] = useState(false);
@@ -15,8 +16,11 @@ export default function Foods() {
         visibility
         headleSearchBar={ headleSearchBar }
       />
+
       { searchBar ? <Search /> : <Categories nameApi="themealdb" drinkOrMeals="meals" /> }
       <RecipeCard nameApi="themealdb" drinkOrMeals="meals" imgAndTitle="Meal" />
+      // <RenderFoods />
+      { searchBar ? <Search /> : null }
       <Footer />
     </div>
   );

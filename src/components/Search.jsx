@@ -3,6 +3,11 @@ import MyConText from '../context/Context';
 
 export default function Search() {
   const { FetchAPI } = useContext(MyConText);
+
+  const HandleClick = () => {
+    FetchAPI();
+  };
+
   return (
     <div>
       <input id="search" data-testid="search-input" />
@@ -42,7 +47,7 @@ export default function Search() {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ () => FetchAPI() }
+        onClick={ () => HandleClick() }
       >
         procurar?
       </button>
