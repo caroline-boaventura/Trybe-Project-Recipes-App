@@ -84,6 +84,7 @@ function Provider({ children }) {
   }
 
   const Context = { FetchAPI, drinkState, mealState, setDrinkState, setMealState };
+
   return (
     <MyConText.Provider value={ Context }>
       { children }
