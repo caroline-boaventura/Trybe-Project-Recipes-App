@@ -1,8 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router';
+import React, { useState } from 'react';
 import { Header, Search, Footer } from '../components/index';
 import RenderFoods from '../components/RenderFoods';
-import MyConText from '../context/Context';
 
 export default function Foods() {
   const [searchBar, setSearchBar] = useState(false);
