@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory as UseHistory } from 'react-router-dom';
 import MyConText from '../context/Context';
+import './RecipeCard.css';
 
+const TWELVE = 12;
 export default function RenderFoods() {
   const { mealState } = useContext(MyConText);
   const history = UseHistory();
@@ -17,7 +19,35 @@ export default function RenderFoods() {
 
     pushe();
   }, [mealState, history]);
+
+  const forEachFunc = ({ strMeal, strMealThumb }, index) => {
+    if (index < TWELVE) {
+      return (
+        <div
+          className="recipeCard"
+          data-testid={ `${index}-recipe-card` }
+          key={ index }
+        >
+          <img
+            data-testid={ `${index}-card-img` }
+            src={ strMealThumb }
+            alt={ strMeal }
+          />
+          <h4
+            data-testid={ `${index}-card-name` }
+          >
+            { strMeal }
+          </h4>
+        </div>
+      );
+    }
+  };
+
   return (
-    <h1>oi</h1>
+    <div className="recipe-card-container">
+      {
+        mealState.meals.map((meal, index) => forEachFunc(meal, index))
+      }
+    </div>
   );
 }
