@@ -46,22 +46,6 @@ export default function Foods() {
 
       { searchBar ? <Search /> : <Categories nameApi="themealdb" drinkOrMeals="meals" /> }
       { conditionRender() }
-      {/* {
-        switch (renderIndex) {
-          case 1:
-            return (<RecipeCard nameApi="themealdb" drinkOrMeals="meals" imgAndTitle="Meal" />)
-          case 2:
-            return (<RenderFoods />)
-          case 3:
-            return (<CategoriesCards />)
-          default:
-            <RecipeCard nameApi="themealdb" drinkOrMeals="meals" imgAndTitle="Meal" />
-        }
-      } */}
-
-      {/* { (renderIndex === 1)
-        ? <RecipeCard nameApi="themealdb" drinkOrMeals="meals" imgAndTitle="Meal" />
-        : <RenderFoods /> } */}
       <Footer />
     </div>
   );
