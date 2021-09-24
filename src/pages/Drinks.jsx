@@ -20,8 +20,7 @@ export default function Drinks() {
       { searchBar
         ? <Search /> : <Categories nameApi="thecocktaildb" drinkOrMeals="drinks" /> }
       <RecipeCard nameApi="thecocktaildb" drinkOrMeals="drinks" imgAndTitle="Drink" />
-      // <RenderDrinks />
-      { searchBar ? <Search /> : null }
+      <RenderDrinks />
       <Footer />
     </div>
   );
