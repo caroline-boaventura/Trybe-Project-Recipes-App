@@ -1,13 +1,13 @@
 .recipe-card-container {
   display: flex;
-  width: 360;
   flex-wrap: wrap;
+  width: 360;
 }
 
 .recipeCard {
-  width: 6rem;
   height: 6rem;
-  margin: 2rem
+  margin: 2rem;
+  width: 6rem;
 }
 
 .recipeCard img {
