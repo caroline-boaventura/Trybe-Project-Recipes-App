@@ -46,28 +46,6 @@ export default function RecipeCard(props) {
   return (
     <div className="recipe-card-container">
       { recipeCardList.map(forEachFunc) }
-      {/* { recipeCardList.map((recipeCard, index) => {
-        if (index < TWELVE) {
-          return (
-            <div
-              className="recipeCard"
-              data-testid={ `${index}-recipe-card` }
-              key={ index }
-            >
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ recipeCard[`str${imgAndTitle}Thumb`] }
-                alt={ recipeCard[`str${imgAndTitle}`] }
-              />
-              <h4
-                data-testid={ `${index}-card-name` }
-              >
-                {recipeCard[`str${imgAndTitle}`]}
-              </h4>
-            </div>
-          );
-        }
-      })} */}
     </div>
   );
 }

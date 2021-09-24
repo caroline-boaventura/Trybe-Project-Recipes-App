@@ -35,15 +35,6 @@ export default function Categories(props) {
   return (
     <div>
       {categoriesList.map(forEachFunc)}
-      {/* { categoriesList.map((category, index) => (
-        <button
-          key={ index }
-          type="button"
-          data-testid={ `${category.strCategory}-category-filter` }
-        >
-          { category.strCategory }
-        </button>
-      ))} */}
     </div>
   );
 }
