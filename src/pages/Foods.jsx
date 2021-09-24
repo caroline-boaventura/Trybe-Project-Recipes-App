@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Header, Search, Footer } from '../components/index';
+import RenderFoods from '../components/RenderFoods';
 
 export default function Foods() {
   const [searchBar, setSearchBar] = useState(false);
@@ -15,6 +16,7 @@ export default function Foods() {
         visibility
         headleSearchBar={ headleSearchBar }
       />
+      <RenderFoods />
       { searchBar ? <Search /> : null }
       <Footer />
     </div>
