@@ -1,25 +1,29 @@
-import React, { useContext, useEffect } from 'react';
-import { useHistory as UseHistory, Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import MyConText from '../context/Context';
 import './RecipeCard.css';
 
 const TWELVE = 12;
 
-export default function RenderDrinks() {
-  const { drinkState } = useContext(MyConText);
-  const history = UseHistory();
+export default function DrinksCategoriesCards() {
+  const [drinkCategoy, setDrinkCategory] = useState();
+  const { categoryName } = useContext(MyConText);
+
+  const fetchFoodCategories = async () => {
+    const results = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categoryName}`)
+      .then((response) => response.json())
+      .then((res) => [...res.drinks]);
+
+    setDrinkCategory(results);
+  };
 
   useEffect(() => {
-    const pushe = (bebidas = drinkState) => {
-      if (drinkState.drinks.length === 1) {
-        history.push(`/bebidas/${bebidas.drinks[0].idDrink}`);
-      } else {
-        console.log('oi');
-      }
-    };
+    fetchFoodCategories();
+  }, [categoryName]);
 
-    pushe();
-  }, [drinkState, history]);
+  useEffect(() => {
+    fetchFoodCategories();
+  }, []);
 
   const forEachFunc = ({ strDrink, strDrinkThumb, idDrink }, index) => {
     if (index < TWELVE) {
@@ -48,9 +52,8 @@ export default function RenderDrinks() {
 
   return (
     <div className="recipe-card-container">
-      {
-        drinkState.drinks.map((drink, index) => forEachFunc(drink, index))
-      }
+      { (drinkCategoy)
+      && drinkCategoy.map((element, index) => forEachFunc(element, index)) }
     </div>
   );
 }

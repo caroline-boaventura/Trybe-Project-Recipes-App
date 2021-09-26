@@ -1,24 +1,29 @@
-import React, { useContext, useEffect } from 'react';
-import { useHistory as UseHistory, Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import MyConText from '../context/Context';
 import './RecipeCard.css';
 
 const TWELVE = 12;
-export default function RenderFoods() {
-  const { mealState } = useContext(MyConText);
-  const history = UseHistory();
+
+export default function FoodsCategoriesCards() {
+  const [foodCategoy, setFoodCategory] = useState();
+  const { categoryName } = useContext(MyConText);
+
+  const fetchFoodCategories = async () => {
+    const results = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`)
+      .then((response) => response.json())
+      .then((res) => [...res.meals]);
+
+    setFoodCategory(results);
+  };
 
   useEffect(() => {
-    const pushe = (comidas = mealState) => {
-      if (mealState.meals.length === 1) {
-        history.push(`/comidas/${comidas.meals[0].idMeal}`);
-      } else {
-        console.log('oi');
-      }
-    };
+    fetchFoodCategories();
+  }, [categoryName]);
 
-    pushe();
-  }, [mealState, history]);
+  useEffect(() => {
+    fetchFoodCategories();
+  }, []);
 
   const forEachFunc = ({ strMeal, strMealThumb, idMeal }, index) => {
     if (index < TWELVE) {
@@ -47,9 +52,8 @@ export default function RenderFoods() {
 
   return (
     <div className="recipe-card-container">
-      {
-        mealState.meals.map((meal, index) => forEachFunc(meal, index))
-      }
+      { (foodCategoy)
+      && foodCategoy.map((element, index) => forEachFunc(element, index)) }
     </div>
   );
 }

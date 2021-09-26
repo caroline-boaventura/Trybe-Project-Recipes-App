@@ -5,8 +5,14 @@ import MyConText from './Context';
 function Provider({ children }) {
   const [mealState, setMealState] = useState({ meals: {} });
   const [drinkState, setDrinkState] = useState({ drinks: {} });
+  const [renderIndex, setRenderIndex] = useState(1);
+  const [categoryName, setCategoryName] = useState('');
 
   const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+
+  const categoryNameTarget = (value) => {
+    setCategoryName(value);
+  };
 
   const FecthFood = (url) => {
     fetch(url)
@@ -17,6 +23,7 @@ function Provider({ children }) {
           global.alert(alert);
         } else {
           setMealState(res);
+          setRenderIndex(2);
         }
       });
   };
@@ -30,6 +37,7 @@ function Provider({ children }) {
           global.alert(alert);
         } else {
           setDrinkState(res);
+          setRenderIndex(2);
         }
       });
   };
@@ -83,7 +91,17 @@ function Provider({ children }) {
     }
   }
 
-  const Context = { FetchAPI, drinkState, mealState, setDrinkState, setMealState };
+  const Context = {
+    FetchAPI,
+    drinkState,
+    mealState,
+    setDrinkState,
+    setMealState,
+    renderIndex,
+    setRenderIndex,
+    categoryNameTarget,
+    categoryName,
+  };
 
   return (
     <MyConText.Provider value={ Context }>
