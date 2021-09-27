@@ -1,4 +1,5 @@
 import React from 'react';
+import { EspecificRecipe } from '../components';
 
 export default function EspecificFoodProgress() {
   return (

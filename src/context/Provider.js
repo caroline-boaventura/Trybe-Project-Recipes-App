@@ -7,8 +7,13 @@ function Provider({ children }) {
   const [drinkState, setDrinkState] = useState({ drinks: {} });
   const [renderIndex, setRenderIndex] = useState(1);
   const [categoryName, setCategoryName] = useState('');
+  const [ingredientIndex, setIngredientIndex] = useState(1);
 
   const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+
+  const handleIngredientIndex = () => {
+    setIngredientIndex(2);
+  };
 
   const categoryNameTarget = (value) => {
     setCategoryName(value);
@@ -101,6 +106,8 @@ function Provider({ children }) {
     setRenderIndex,
     categoryNameTarget,
     categoryName,
+    ingredientIndex,
+    handleIngredientIndex,
   };
 
   return (

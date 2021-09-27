@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/whiteHeartIcon.svg';
+import favoriteIconBlack from '../images/blackHeartIcon.svg';
+import { Ingredients, IngredientsInProgress } from './index';
+import MyConText from '../context/Context';
 
 export default function EspecificRecipe(props) {
   const [especificRecipe, setEspecificRecipe] = useState({});
+  const [favoriteButton, setFavoriteButton] = useState('/static/media/whiteHeartIcon.ea3b6ba8.svg');
   const { nameApi, drinkOrMeals, imgAndTitle, id, food } = props;
+  const { ingredientIndex } = useContext(MyConText);
 
   const fetchRecipeId = async () => {
     const results = await fetch(`https://www.${nameApi}.com/api/json/v1/1/lookup.php?i=${id}`)
@@ -18,21 +23,6 @@ export default function EspecificRecipe(props) {
   useEffect(() => {
     fetchRecipeId();
   }, [id]);
-
-  const mapIngredients = () => {
-    const objectIngredients = Object.entries(especificRecipe);
-
-    const ingredientsName = objectIngredients
-      .filter((element) => element[0].includes('strIngredient'));
-
-    const ingredientsQuantities = objectIngredients
-      .filter((element) => element[0].includes('strMeasure'));
-
-    const arrayIngredients = ingredientsName
-      .map((ingredient, index) => [ingredient[1], ingredientsQuantities[index][1]]);
-
-    return arrayIngredients;
-  };
 
   const videoYoutube = () => (
     <iframe
@@ -56,6 +46,14 @@ export default function EspecificRecipe(props) {
     );
   };
 
+  const handleFavoriteButton = () => {
+    if (favoriteButton === '/static/media/whiteHeartIcon.ea3b6ba8.svg') {
+      setFavoriteButton('/static/media/blackHeartIcon.b8913346.svg');
+    } else {
+      setFavoriteButton('/static/media/whiteHeartIcon.ea3b6ba8.svg');
+    }
+  };
+
   return (
     <div>
       { console.log(especificRecipe) }
@@ -74,31 +72,22 @@ export default function EspecificRecipe(props) {
           <button type="button">
             <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
           </button>
-          <button type="button">
-            <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite-icon" />
+          <button type="button" onClick={ handleFavoriteButton }>
+            <img data-testid="favorite-btn" src={ favoriteButton } alt="favorite-icon" />
           </button>
         </div>
       </div>
       <div>
         <h2>Ingredients</h2>
-        { mapIngredients().map((ingredient, index) => {
-          if (ingredient[0] !== '') {
-            return (
-              <p
-                data-testid={ `${index}-ingredient-name-and-measure` }
-                key={ index }
-              >
-                { `${ingredient[0]} - ${ingredient[1]}` }
-              </p>
-            );
-          } return console.log('oi');
-        }) }
+        { ingredientIndex === 1
+          ? <Ingredients ingredientsList={ especificRecipe } />
+          : <IngredientsInProgress /> }
       </div>
       <div width="360">
         <h2>Instructions</h2>
         <p data-testid="instructions">{ especificRecipe.strInstructions }</p>
       </div>
-      { (food) && videoYoutube() }
+      { (food && ingredientIndex === 1) && videoYoutube() }
     </div>
   );
 }
