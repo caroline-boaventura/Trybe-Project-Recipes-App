@@ -45,6 +45,17 @@ export default function EspecificRecipe(props) {
     />
   );
 
+  const category = () => {
+    if (food) {
+      return (
+        <h3 data-testid="recipe-category">{ especificRecipe.strCategory }</h3>
+      );
+    }
+    return (
+      <h3 data-testid="recipe-category">{ especificRecipe.strAlcoholic }</h3>
+    );
+  };
+
   return (
     <div>
       { console.log(especificRecipe) }
@@ -57,7 +68,7 @@ export default function EspecificRecipe(props) {
       <div>
         <div>
           <h1 data-testid="recipe-title">{ especificRecipe[`str${imgAndTitle}`] }</h1>
-          <h3 data-testid="recipe-category">{ especificRecipe.strCategory }</h3>
+          { category() }
         </div>
         <div>
           <button type="button">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { EspecificRecipe } from '../components/index';
+import { EspecificRecipe, RecommendedRecipes } from '../components/index';
+import '../components/Footer.css';
 
 export default function EspecificFood() {
   const { pathname } = useLocation();
@@ -15,6 +16,19 @@ export default function EspecificFood() {
         imgAndTitle="Meal"
         food
       />
+      <RecommendedRecipes
+        nameApi="thecocktaildb"
+        drinkOrMeals="drinks"
+        imgAndTitle="Drink"
+        linkMealOrDrink="bebidas"
+      />
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        className="footer"
+      >
+        Iniciar Receita
+      </button>
     </div>
   );
 }
