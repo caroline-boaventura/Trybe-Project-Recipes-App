@@ -9,13 +9,14 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './RecipeCard.css';
 
 const copy = require('clipboard-copy');
-// const whiteHeart = '/static/media/whiteHeartIcon.ea3b6ba8.svg';
-// const blackHeart = '/static/media/blackHeartIcon.b8913346.svg';
+
+const BUTTON_WHITE_ID = 'button-favorite-white';
+const BUTTON_BLACK_ID = 'button-favorite-black';
 
 export default function EspecificRecipe(props) {
   const [especificRecipe, setEspecificRecipe] = useState({});
+  const [buttonClicked, setButtonClicked] = useState(whiteHeartIcon);
   const [divShare, setDivShare] = useState('displayNone');
-  const [favoriteButton, setFavoriteButton] = useState(whiteHeartIcon);
   const { nameApi, drinkOrMeals, imgAndTitle, id, food } = props;
   const { ingredientIndex } = useContext(MyConText);
   const location = useLocation();
@@ -54,11 +55,84 @@ export default function EspecificRecipe(props) {
     );
   };
 
-  const handleFavoriteButton = () => {
-    if (favoriteButton === whiteHeartIcon) {
-      setFavoriteButton(blackHeartIcon);
+  const handleFavoriteRecipe = () => {
+    const getItemLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    const idFavorite = getItemLocalStorage
+      .find((elementFavorite) => elementFavorite.id === id);
+
+    if (idFavorite) {
+      document.getElementById(BUTTON_WHITE_ID).className = 'displayNone';
+      document.getElementById(BUTTON_BLACK_ID)
+        .className = 'displayButtonFavorite';
+      setButtonClicked(blackHeartIcon);
+    }
+  };
+
+  useEffect(() => {
+    handleFavoriteRecipe();
+  }, []);
+
+  const handleDeleteLocalStorage = () => {
+    const getItemLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    const idFavorite = getItemLocalStorage
+      .filter((elementFavorite) => elementFavorite.id !== id);
+
+    localStorage.setItem('favoriteRecipes', JSON.stringify(idFavorite));
+    document.getElementById(BUTTON_WHITE_ID).className = 'displayButtonFavorite';
+    document.getElementById(BUTTON_BLACK_ID)
+      .className = 'displayNone';
+    setButtonClicked(whiteHeartIcon);
+  };
+
+  const handleSaveLocalStorage = () => {
+    if (food) {
+      const objectLocalStorage = {
+        id: especificRecipe.idMeal,
+        type: 'meal',
+        area: especificRecipe.strArea,
+        category: especificRecipe.strCategory,
+        name: especificRecipe.strMeal,
+        image: especificRecipe.strMealThumb,
+      };
+      if (localStorage.getItem('favoriteRecipes') === null) {
+        localStorage.setItem('favoriteRecipes',
+          JSON.stringify([objectLocalStorage]));
+      } else {
+        localStorage.setItem('favoriteRecipes',
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem('favoriteRecipes')),
+            objectLocalStorage,
+          ]));
+      }
+      document.getElementById(BUTTON_WHITE_ID).className = 'displayNone';
+      document.getElementById(BUTTON_BLACK_ID)
+        .className = 'displayButtonFavorite';
+      setButtonClicked(blackHeartIcon);
     } else {
-      setFavoriteButton(whiteHeartIcon);
+      const objectLocalStorage = {
+        id: especificRecipe.idDrink,
+        type: 'drink',
+        area: especificRecipe.strArea,
+        category: especificRecipe.strCategory,
+        alcoholicOrNot: especificRecipe.strAlcoholic,
+        name: especificRecipe.strDrink,
+        image: especificRecipe.strDrinkThumb,
+      };
+      if (localStorage.getItem('favoriteRecipes') === null) {
+        localStorage.setItem('favoriteRecipes',
+          JSON.stringify([objectLocalStorage]));
+      } else {
+        localStorage.setItem('favoriteRecipes',
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem('favoriteRecipes')),
+            objectLocalStorage,
+          ]));
+      }
+      document.getElementById(BUTTON_WHITE_ID).className = 'displayNone';
+      document.getElementById(BUTTON_BLACK_ID)
+        .className = 'displayButtonFavorite';
     }
   };
 
@@ -70,7 +144,6 @@ export default function EspecificRecipe(props) {
 
   return (
     <div>
-      { console.log(especificRecipe) }
       <img
         data-testid="recipe-photo"
         src={ especificRecipe[`str${imgAndTitle}Thumb`] }
@@ -86,8 +159,21 @@ export default function EspecificRecipe(props) {
           <button type="button" onClick={ handleShareButton }>
             <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
           </button>
-          <button type="button" onClick={ handleFavoriteButton }>
-            <img data-testid="favorite-btn" src={ favoriteButton } alt="favorite-icon" />
+          <button
+            type="button"
+            id="button-favorite-white"
+            onClick={ handleSaveLocalStorage }
+            className="displayButtonFavorite"
+          >
+            <img data-testid="favorite-btn" src={ buttonClicked } alt="favorite-icon" />
+          </button>
+          <button
+            type="button"
+            id="button-favorite-black"
+            onClick={ handleDeleteLocalStorage }
+            className="displayNone"
+          >
+            <img data-testid="favorite-btn" src={ buttonClicked } alt="favorite-icon" />
           </button>
           <div className={ divShare }>Link copiado!</div>
         </div>

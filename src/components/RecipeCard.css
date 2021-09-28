@@ -25,3 +25,7 @@
 .displayInBlock {
   display: block;
 }
+
+.displayButtonFavorite {
+  display: inline-block;
+}

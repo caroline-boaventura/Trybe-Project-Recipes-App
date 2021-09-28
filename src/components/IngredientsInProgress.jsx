@@ -21,7 +21,11 @@ export default function IngredientsInProgress(props) {
   };
 
   const handleClassName = ({ target }) => {
-    target.className = 'scratched';
+    if (target.checked) {
+      target.parentElement.className = 'scratched';
+    } else {
+      target.parentElement.classList.remove('scratched');
+    }
   };
 
   return (
@@ -33,9 +37,13 @@ export default function IngredientsInProgress(props) {
               <label
                 htmlFor={ ingredient[0] }
                 key={ index }
-                onChange={ (event) => handleClassName(event) }
               >
-                <input type="checkbox" name={ ingredient[0] } value={ ingredient[0] } />
+                <input
+                  type="checkbox"
+                  id={ ingredient[0] }
+                  value={ ingredient[0] }
+                  onClick={ (event) => handleClassName(event) }
+                />
                 { `${ingredient[0]} - ${ingredient[1]}` }
               </label>
             </div>
