@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { useHistory as UseHistory, useLocation } from 'react-router-dom';
-import { EspecificRecipe, RecommendedRecipes } from '../components/index';
+import { RecommendedRecipes } from '../components/index';
 import '../components/Footer.css';
 import MyConText from '../context/Context';
+import EspecificRecipe from '../components/EspecificRecipe';
 
 export default function EspecificFood() {
   const { pathname } = useLocation();

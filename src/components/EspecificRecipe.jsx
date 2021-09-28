@@ -1,16 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-import favoriteIcon from '../images/whiteHeartIcon.svg';
-import favoriteIconBlack from '../images/blackHeartIcon.svg';
 import { Ingredients, IngredientsInProgress } from './index';
 import MyConText from '../context/Context';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import './RecipeCard.css';
+
+const copy = require('clipboard-copy');
+// const whiteHeart = '/static/media/whiteHeartIcon.ea3b6ba8.svg';
+// const blackHeart = '/static/media/blackHeartIcon.b8913346.svg';
 
 export default function EspecificRecipe(props) {
   const [especificRecipe, setEspecificRecipe] = useState({});
-  const [favoriteButton, setFavoriteButton] = useState('/static/media/whiteHeartIcon.ea3b6ba8.svg');
+  const [divShare, setDivShare] = useState('displayNone');
+  const [favoriteButton, setFavoriteButton] = useState(whiteHeartIcon);
   const { nameApi, drinkOrMeals, imgAndTitle, id, food } = props;
   const { ingredientIndex } = useContext(MyConText);
+  const location = useLocation();
 
   const fetchRecipeId = async () => {
     const results = await fetch(`https://www.${nameApi}.com/api/json/v1/1/lookup.php?i=${id}`)
@@ -47,11 +55,17 @@ export default function EspecificRecipe(props) {
   };
 
   const handleFavoriteButton = () => {
-    if (favoriteButton === '/static/media/whiteHeartIcon.ea3b6ba8.svg') {
-      setFavoriteButton('/static/media/blackHeartIcon.b8913346.svg');
+    if (favoriteButton === whiteHeartIcon) {
+      setFavoriteButton(blackHeartIcon);
     } else {
-      setFavoriteButton('/static/media/whiteHeartIcon.ea3b6ba8.svg');
+      setFavoriteButton(whiteHeartIcon);
     }
+  };
+
+  const handleShareButton = () => {
+    copy(`http://localhost:3000${location.pathname}`);
+
+    setDivShare('displayInBlock');
   };
 
   return (
@@ -69,19 +83,20 @@ export default function EspecificRecipe(props) {
           { category() }
         </div>
         <div>
-          <button type="button">
+          <button type="button" onClick={ handleShareButton }>
             <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
           </button>
           <button type="button" onClick={ handleFavoriteButton }>
             <img data-testid="favorite-btn" src={ favoriteButton } alt="favorite-icon" />
           </button>
+          <div className={ divShare }>Link copiado!</div>
         </div>
       </div>
       <div>
         <h2>Ingredients</h2>
         { ingredientIndex === 1
           ? <Ingredients ingredientsList={ especificRecipe } />
-          : <IngredientsInProgress /> }
+          : <IngredientsInProgress ingredientsList={ especificRecipe } /> }
       </div>
       <div width="360">
         <h2>Instructions</h2>

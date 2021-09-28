@@ -7,7 +7,6 @@ import {
   Drinks,
   EspecificDrink,
   EspecificFood,
-  EspecificFoodProgress,
   ExploreAll,
   ExploreFoods,
   ExploreDrinks,
