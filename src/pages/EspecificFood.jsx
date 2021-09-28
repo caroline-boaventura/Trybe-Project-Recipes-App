@@ -23,6 +23,7 @@ export default function EspecificFood() {
         id={ id }
         drinkOrMeals="meals"
         imgAndTitle="Meal"
+        objType="comida"
         food
       />
       {(ingredientIndex === 1) && <RecommendedRecipes

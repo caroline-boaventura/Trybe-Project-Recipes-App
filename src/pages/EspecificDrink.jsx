@@ -21,6 +21,7 @@ export default function EspecificDrink() {
         drinkOrMeals="drinks"
         imgAndTitle="Drink"
         food={ false }
+        objType="bebida"
       />
       <RecommendedRecipes
         nameApi="themealdb"

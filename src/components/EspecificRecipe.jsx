@@ -10,14 +10,11 @@ import './RecipeCard.css';
 
 const copy = require('clipboard-copy');
 
-const BUTTON_WHITE_ID = 'button-favorite-white';
-const BUTTON_BLACK_ID = 'button-favorite-black';
-
 export default function EspecificRecipe(props) {
   const [especificRecipe, setEspecificRecipe] = useState({});
   const [buttonClicked, setButtonClicked] = useState(whiteHeartIcon);
   const [divShare, setDivShare] = useState('displayNone');
-  const { nameApi, drinkOrMeals, imgAndTitle, id, food } = props;
+  const { nameApi, drinkOrMeals, imgAndTitle, id, food, objType, } = props;
   const { ingredientIndex } = useContext(MyConText);
   const location = useLocation();
 
@@ -83,10 +80,10 @@ export default function EspecificRecipe(props) {
   const handleSaveLocalStorage = () => {
     const objectLocalStorage = {
       id: especificRecipe[`id${imgAndTitle}`],
-      type: imgAndTitle,
-      area: especificRecipe.strArea,
+      type: objType,
+      area: especificRecipe.strArea || '',
       category: especificRecipe.strCategory,
-      alcoholicOrNot: especificRecipe.strAlcoholic,
+      alcoholicOrNot: especificRecipe.strAlcoholic || '',
       name: especificRecipe[`str${imgAndTitle}`],
       image: especificRecipe[`str${imgAndTitle}Thumb`],
     };
