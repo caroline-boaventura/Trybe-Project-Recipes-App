@@ -1,7 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import EspecificRecipeProgress from '../components/EspecificRecipeProgress';
 
 export default function EspecificDrinkProgress() {
+  const { pathname } = useLocation();
+  const id = pathname.split('/')[2];
   return (
-    <h1>Progresso de drink espeficico</h1>
+    <EspecificRecipeProgress
+      id={ id }
+      imgAndTitle="Drink"
+      objType="bebida"
+      food={ false }
+    />
   );
 }

@@ -39,6 +39,7 @@ export default function IngredientsInProgress(props) {
                 key={ index }
               >
                 <input
+                  data-testid={ `${index}-ingredient-step` }
                   type="checkbox"
                   id={ ingredient[0] }
                   value={ ingredient[0] }

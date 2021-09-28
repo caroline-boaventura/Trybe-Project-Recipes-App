@@ -7,6 +7,7 @@ import {
   Drinks,
   EspecificDrink,
   EspecificFood,
+  EspecificFoodProgress,
   ExploreAll,
   ExploreFoods,
   ExploreDrinks,
@@ -26,7 +27,7 @@ function App() {
         <Route
           exact
           path="/comidas/:id/in-progress"
-          component={ EspecificFood }
+          component={ EspecificFoodProgress }
         />
         <Route
           exact

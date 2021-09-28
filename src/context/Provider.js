@@ -8,6 +8,7 @@ function Provider({ children }) {
   const [renderIndex, setRenderIndex] = useState(1);
   const [categoryName, setCategoryName] = useState('');
   const [ingredientIndex, setIngredientIndex] = useState(1);
+  const [especificRecipe, setEspecificRecipe] = useState({});
 
   const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
 
@@ -108,6 +109,8 @@ function Provider({ children }) {
     categoryName,
     ingredientIndex,
     handleIngredientIndex,
+    especificRecipe,
+    setEspecificRecipe,
   };
 
   return (

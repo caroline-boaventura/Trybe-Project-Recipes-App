@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-import { Ingredients } from './index';
+import { IngredientsInProgress } from './index';
 import MyConText from '../context/Context';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -10,35 +10,12 @@ import './RecipeCard.css';
 
 const copy = require('clipboard-copy');
 
-export default function EspecificRecipe(props) {
+export default function EspecificRecipeProgress(props) {
   const [buttonClicked, setButtonClicked] = useState(whiteHeartIcon);
   const [divShare, setDivShare] = useState('displayNone');
-  const { nameApi, drinkOrMeals, imgAndTitle, id, food, objType } = props;
-  const { ingredientIndex, setEspecificRecipe, especificRecipe } = useContext(MyConText);
+  const { imgAndTitle, id, food, objType } = props;
+  const { especificRecipe } = useContext(MyConText);
   const location = useLocation();
-
-  const fetchRecipeId = async () => {
-    const results = await fetch(`https://www.${nameApi}.com/api/json/v1/1/lookup.php?i=${id}`)
-      .then((response) => response.json())
-      .then((res) => res[drinkOrMeals]);
-
-    setEspecificRecipe({ ...results[0] });
-  };
-
-  useEffect(() => {
-    fetchRecipeId();
-  }, [id]);
-
-  const videoYoutube = () => (
-    <iframe
-      data-testid="video"
-      title="Recipe"
-      width="340"
-      height="315"
-      src={ especificRecipe.strYoutube }
-      allowfull
-    />
-  );
 
   const category = () => {
     if (food) {
@@ -142,20 +119,17 @@ export default function EspecificRecipe(props) {
       </div>
       <div>
         <h2>Ingredients</h2>
-        <Ingredients ingredientsList={ especificRecipe } />
+        <IngredientsInProgress ingredientsList={ especificRecipe } />
       </div>
       <div width="360">
         <h2>Instructions</h2>
         <p data-testid="instructions">{ especificRecipe.strInstructions }</p>
       </div>
-      { (food && ingredientIndex === 1) && videoYoutube() }
     </div>
   );
 }
 
-EspecificRecipe.propTypes = ({
-  nameApi: PropTypes.string.isRequired,
-  drinkOrMeals: PropTypes.string.isRequired,
+EspecificRecipeProgress.propTypes = ({
   imgAndTitle: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   food: PropTypes.bool.isRequired,
