@@ -58,13 +58,10 @@ export default function EspecificRecipe(props) {
   const handleFavoriteRecipe = () => {
     const getItemLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-    const idFavorite = getItemLocalStorage
+    const idFavorite = (getItemLocalStorage) && getItemLocalStorage
       .find((elementFavorite) => elementFavorite.id === id);
 
     if (idFavorite) {
-      document.getElementById(BUTTON_WHITE_ID).className = 'displayNone';
-      document.getElementById(BUTTON_BLACK_ID)
-        .className = 'displayButtonFavorite';
       setButtonClicked(blackHeartIcon);
     }
   };
@@ -80,59 +77,37 @@ export default function EspecificRecipe(props) {
       .filter((elementFavorite) => elementFavorite.id !== id);
 
     localStorage.setItem('favoriteRecipes', JSON.stringify(idFavorite));
-    document.getElementById(BUTTON_WHITE_ID).className = 'displayButtonFavorite';
-    document.getElementById(BUTTON_BLACK_ID)
-      .className = 'displayNone';
     setButtonClicked(whiteHeartIcon);
   };
 
   const handleSaveLocalStorage = () => {
-    if (food) {
-      const objectLocalStorage = {
-        id: especificRecipe.idMeal,
-        type: 'meal',
-        area: especificRecipe.strArea,
-        category: especificRecipe.strCategory,
-        name: especificRecipe.strMeal,
-        image: especificRecipe.strMealThumb,
-      };
-      if (localStorage.getItem('favoriteRecipes') === null) {
-        localStorage.setItem('favoriteRecipes',
-          JSON.stringify([objectLocalStorage]));
-      } else {
-        localStorage.setItem('favoriteRecipes',
-          JSON.stringify([
-            ...JSON.parse(localStorage.getItem('favoriteRecipes')),
-            objectLocalStorage,
-          ]));
-      }
-      document.getElementById(BUTTON_WHITE_ID).className = 'displayNone';
-      document.getElementById(BUTTON_BLACK_ID)
-        .className = 'displayButtonFavorite';
-      setButtonClicked(blackHeartIcon);
+    const objectLocalStorage = {
+      id: especificRecipe[`id${imgAndTitle}`],
+      type: imgAndTitle,
+      area: especificRecipe.strArea,
+      category: especificRecipe.strCategory,
+      alcoholicOrNot: especificRecipe.strAlcoholic,
+      name: especificRecipe[`str${imgAndTitle}`],
+      image: especificRecipe[`str${imgAndTitle}Thumb`],
+    };
+    if (localStorage.getItem('favoriteRecipes') === null) {
+      localStorage.setItem('favoriteRecipes',
+        JSON.stringify([objectLocalStorage]));
     } else {
-      const objectLocalStorage = {
-        id: especificRecipe.idDrink,
-        type: 'drink',
-        area: especificRecipe.strArea,
-        category: especificRecipe.strCategory,
-        alcoholicOrNot: especificRecipe.strAlcoholic,
-        name: especificRecipe.strDrink,
-        image: especificRecipe.strDrinkThumb,
-      };
-      if (localStorage.getItem('favoriteRecipes') === null) {
-        localStorage.setItem('favoriteRecipes',
-          JSON.stringify([objectLocalStorage]));
-      } else {
-        localStorage.setItem('favoriteRecipes',
-          JSON.stringify([
-            ...JSON.parse(localStorage.getItem('favoriteRecipes')),
-            objectLocalStorage,
-          ]));
-      }
-      document.getElementById(BUTTON_WHITE_ID).className = 'displayNone';
-      document.getElementById(BUTTON_BLACK_ID)
-        .className = 'displayButtonFavorite';
+      localStorage.setItem('favoriteRecipes',
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem('favoriteRecipes')),
+          objectLocalStorage,
+        ]));
+    }
+    setButtonClicked(blackHeartIcon);
+  };
+
+  const onClickButton = () => {
+    if (buttonClicked === whiteHeartIcon) {
+      handleSaveLocalStorage();
+    } else {
+      handleDeleteLocalStorage();
     }
   };
 
@@ -144,6 +119,7 @@ export default function EspecificRecipe(props) {
 
   return (
     <div>
+      {console.log(especificRecipe)}
       <img
         data-testid="recipe-photo"
         src={ especificRecipe[`str${imgAndTitle}Thumb`] }
@@ -161,17 +137,7 @@ export default function EspecificRecipe(props) {
           </button>
           <button
             type="button"
-            id="button-favorite-white"
-            onClick={ handleSaveLocalStorage }
-            className="displayButtonFavorite"
-          >
-            <img data-testid="favorite-btn" src={ buttonClicked } alt="favorite-icon" />
-          </button>
-          <button
-            type="button"
-            id="button-favorite-black"
-            onClick={ handleDeleteLocalStorage }
-            className="displayNone"
+            onClick={ onClickButton }
           >
             <img data-testid="favorite-btn" src={ buttonClicked } alt="favorite-icon" />
           </button>
