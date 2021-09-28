@@ -11,10 +11,11 @@ import './RecipeCard.css';
 const copy = require('clipboard-copy');
 
 export default function EspecificRecipe(props) {
+  const [especificRecipe, setEspecificRecipe] = useState({});
   const [buttonClicked, setButtonClicked] = useState(whiteHeartIcon);
   const [divShare, setDivShare] = useState('displayNone');
   const { nameApi, drinkOrMeals, imgAndTitle, id, food, objType } = props;
-  const { ingredientIndex, setEspecificRecipe, especificRecipe } = useContext(MyConText);
+  const { ingredientIndex, setUrlCopy } = useContext(MyConText);
   const location = useLocation();
 
   const fetchRecipeId = async () => {
@@ -111,6 +112,7 @@ export default function EspecificRecipe(props) {
     copy(`http://localhost:3000${location.pathname}`);
 
     setDivShare('displayInBlock');
+    setUrlCopy(`http://localhost:3000${location.pathname}`);
   };
 
   return (

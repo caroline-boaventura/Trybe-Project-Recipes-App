@@ -37,9 +37,9 @@ export default function IngredientsInProgress(props) {
               <label
                 htmlFor={ ingredient[0] }
                 key={ index }
+                data-testid={ `${index}-ingredient-step` }
               >
                 <input
-                  data-testid={ `${index}-ingredient-step` }
                   type="checkbox"
                   id={ ingredient[0] }
                   value={ ingredient[0] }

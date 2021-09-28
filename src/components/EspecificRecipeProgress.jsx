@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import { IngredientsInProgress } from './index';
-import MyConText from '../context/Context';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './RecipeCard.css';
@@ -11,11 +10,23 @@ import './RecipeCard.css';
 const copy = require('clipboard-copy');
 
 export default function EspecificRecipeProgress(props) {
+  const [especificRecipe, setEspecificRecipe] = useState({});
   const [buttonClicked, setButtonClicked] = useState(whiteHeartIcon);
   const [divShare, setDivShare] = useState('displayNone');
-  const { imgAndTitle, id, food, objType } = props;
-  const { especificRecipe } = useContext(MyConText);
+  const { nameApi, drinkOrMeals, imgAndTitle, id, food, objType } = props;
   const location = useLocation();
+
+  const fetchRecipeId = async () => {
+    const results = await fetch(`https://www.${nameApi}.com/api/json/v1/1/lookup.php?i=${id}`)
+      .then((response) => response.json())
+      .then((res) => res[drinkOrMeals]);
+
+    setEspecificRecipe({ ...results[0] });
+  };
+
+  useEffect(() => {
+    fetchRecipeId();
+  }, [id]);
 
   const category = () => {
     if (food) {
@@ -85,7 +96,9 @@ export default function EspecificRecipeProgress(props) {
   };
 
   const handleShareButton = () => {
-    copy(`http://localhost:3000${location.pathname}`);
+    const arrayUrl = location.pathname.split('/');
+    const stringPathname = `/${arrayUrl[1]}/${arrayUrl[2]}`;
+    copy(`http://localhost:3000${stringPathname}`);
 
     setDivShare('displayInBlock');
   };
@@ -125,11 +138,20 @@ export default function EspecificRecipeProgress(props) {
         <h2>Instructions</h2>
         <p data-testid="instructions">{ especificRecipe.strInstructions }</p>
       </div>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        className="displayNone footer"
+      >
+        Finalizar Receita
+      </button>
     </div>
   );
 }
 
 EspecificRecipeProgress.propTypes = ({
+  nameApi: PropTypes.string.isRequired,
+  drinkOrMeals: PropTypes.string.isRequired,
   imgAndTitle: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   food: PropTypes.bool.isRequired,

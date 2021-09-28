@@ -4,11 +4,11 @@ import MyConText from './Context';
 
 function Provider({ children }) {
   const [mealState, setMealState] = useState({ meals: {} });
+  const [urlCopy, setUrlCopy] = useState('');
   const [drinkState, setDrinkState] = useState({ drinks: {} });
   const [renderIndex, setRenderIndex] = useState(1);
   const [categoryName, setCategoryName] = useState('');
   const [ingredientIndex, setIngredientIndex] = useState(1);
-  const [especificRecipe, setEspecificRecipe] = useState({});
 
   const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
 
@@ -109,8 +109,8 @@ function Provider({ children }) {
     categoryName,
     ingredientIndex,
     handleIngredientIndex,
-    especificRecipe,
-    setEspecificRecipe,
+    urlCopy,
+    setUrlCopy,
   };
 
   return (

@@ -7,10 +7,12 @@ export default function EspecificDrinkProgress() {
   const id = pathname.split('/')[2];
   return (
     <EspecificRecipeProgress
+      nameApi="thecocktaildb"
       id={ id }
+      drinkOrMeals="drinks"
       imgAndTitle="Drink"
-      objType="bebida"
       food={ false }
+      objType="bebida"
     />
   );
 }

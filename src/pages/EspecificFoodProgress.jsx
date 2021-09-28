@@ -7,7 +7,9 @@ export default function EspecificFoodProgress() {
   const id = pathname.split('/')[2];
   return (
     <EspecificRecipeProgress
+      nameApi="themealdb"
       id={ id }
+      drinkOrMeals="meals"
       imgAndTitle="Meal"
       objType="comida"
       food
