@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import './RecipeCard.css';
 
 export default function IngredientsInProgress(props) {
-  const { ingredientsList } = props;
+  const { ingredientsList,
+    setIgredientChecked, setIgredientCheckedLenght, ingredientChecked } = props;
 
   const mapIngredientsInProgress = () => {
     const objectIngredients = Object.entries(ingredientsList);
@@ -26,6 +27,17 @@ export default function IngredientsInProgress(props) {
     } else {
       target.parentElement.classList.remove('scratched');
     }
+
+    const ingredientsInProgressLength = (mapIngredientsInProgress()
+      .filter((ingredient) => {
+        if (ingredient[0]) {
+          return ingredient[0];
+        }
+        return null;
+      }));
+
+    setIgredientCheckedLenght(ingredientsInProgressLength.length);
+    setIgredientChecked([...ingredientChecked, target.value]);
   };
 
   return (
@@ -49,7 +61,7 @@ export default function IngredientsInProgress(props) {
               </label>
             </div>
           );
-        } return console.log('oi');
+        } return null;
       }) }
     </div>
   );
@@ -57,4 +69,7 @@ export default function IngredientsInProgress(props) {
 
 IngredientsInProgress.propTypes = ({
   ingredientsList: PropTypes.objectOf().isRequired,
+  setIgredientChecked: PropTypes.func.isRequired,
+  setIgredientCheckedLenght: PropTypes.func.isRequired,
+  ingredientChecked: PropTypes.string.isRequired,
 });

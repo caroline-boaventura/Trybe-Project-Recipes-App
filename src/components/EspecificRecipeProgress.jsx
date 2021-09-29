@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import { IngredientsInProgress } from './index';
@@ -11,6 +11,9 @@ const copy = require('clipboard-copy');
 
 export default function EspecificRecipeProgress(props) {
   const [especificRecipe, setEspecificRecipe] = useState({});
+  const [stateDisabled, setStateDisabled] = useState(true);
+  const [ingredientChecked, setIgredientChecked] = useState([]);
+  const [ingredientCheckedLenght, setIgredientCheckedLenght] = useState();
   const [buttonClicked, setButtonClicked] = useState(whiteHeartIcon);
   const [divShare, setDivShare] = useState('displayNone');
   const { nameApi, drinkOrMeals, imgAndTitle, id, food, objType } = props;
@@ -97,11 +100,17 @@ export default function EspecificRecipeProgress(props) {
 
   const handleShareButton = () => {
     const arrayUrl = location.pathname.split('/');
-    const stringPathname = `/${arrayUrl[1]}/${arrayUrl[2]}`;
-    copy(`http://localhost:3000${stringPathname}`);
+    const stringPathname = `${arrayUrl[1]}/${arrayUrl[2]}`;
+    copy(`http://localhost:3000/${stringPathname}`);
 
     setDivShare('displayInBlock');
   };
+
+  useEffect(() => {
+    if (ingredientChecked.length === ingredientCheckedLenght) {
+      setStateDisabled(false);
+    }
+  }, [ingredientChecked]);
 
   return (
     <div>
@@ -132,19 +141,28 @@ export default function EspecificRecipeProgress(props) {
       </div>
       <div>
         <h2>Ingredients</h2>
-        <IngredientsInProgress ingredientsList={ especificRecipe } />
+        <IngredientsInProgress
+          ingredientsList={ especificRecipe }
+          setIgredientChecked={ setIgredientChecked }
+          setIgredientCheckedLenght={ setIgredientCheckedLenght }
+          ingredientChecked={ ingredientChecked }
+        />
       </div>
       <div width="360">
         <h2>Instructions</h2>
         <p data-testid="instructions">{ especificRecipe.strInstructions }</p>
       </div>
-      <button
-        type="button"
-        data-testid="finish-recipe-btn"
-        className="displayNone footer"
-      >
-        Finalizar Receita
-      </button>
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          className="footer"
+          id="finish-recipe-btn"
+          disabled={ stateDisabled }
+        >
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }
