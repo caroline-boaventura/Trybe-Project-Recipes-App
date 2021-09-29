@@ -13,3 +13,19 @@
 .recipeCard img {
   width: 100%;
 }
+
+.scratched {
+  text-decoration: line-through;
+}
+
+.displayNone {
+  display: none;
+}
+
+.displayInBlock {
+  display: block;
+}
+
+.displayButtonFavorite {
+  display: inline-block;
+}

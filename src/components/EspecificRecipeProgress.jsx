@@ -1,21 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-import { Ingredients } from './index';
-import MyConText from '../context/Context';
+import { IngredientsInProgress } from './index';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './RecipeCard.css';
 
 const copy = require('clipboard-copy');
 
-export default function EspecificRecipe(props) {
+export default function EspecificRecipeProgress(props) {
   const [especificRecipe, setEspecificRecipe] = useState({});
+  const [stateDisabled, setStateDisabled] = useState(true);
+  const [ingredientChecked, setIgredientChecked] = useState([]);
+  const [ingredientCheckedLenght, setIgredientCheckedLenght] = useState();
   const [buttonClicked, setButtonClicked] = useState(whiteHeartIcon);
   const [divShare, setDivShare] = useState('displayNone');
   const { nameApi, drinkOrMeals, imgAndTitle, id, food, objType } = props;
-  const { ingredientIndex, setUrlCopy } = useContext(MyConText);
   const location = useLocation();
 
   const fetchRecipeId = async () => {
@@ -29,17 +30,6 @@ export default function EspecificRecipe(props) {
   useEffect(() => {
     fetchRecipeId();
   }, [id]);
-
-  const videoYoutube = () => (
-    <iframe
-      data-testid="video"
-      title="Recipe"
-      width="340"
-      height="315"
-      src={ especificRecipe.strYoutube }
-      allowfull
-    />
-  );
 
   const category = () => {
     if (food) {
@@ -109,11 +99,18 @@ export default function EspecificRecipe(props) {
   };
 
   const handleShareButton = () => {
-    copy(`http://localhost:3000${location.pathname}`);
+    const arrayUrl = location.pathname.split('/');
+    const stringPathname = `${arrayUrl[1]}/${arrayUrl[2]}`;
+    copy(`http://localhost:3000/${stringPathname}`);
 
     setDivShare('displayInBlock');
-    setUrlCopy(`http://localhost:3000${location.pathname}`);
   };
+
+  useEffect(() => {
+    if (ingredientChecked.length === ingredientCheckedLenght) {
+      setStateDisabled(false);
+    }
+  }, [ingredientChecked]);
 
   return (
     <div>
@@ -144,18 +141,33 @@ export default function EspecificRecipe(props) {
       </div>
       <div>
         <h2>Ingredients</h2>
-        <Ingredients ingredientsList={ especificRecipe } />
+        <IngredientsInProgress
+          ingredientsList={ especificRecipe }
+          setIgredientChecked={ setIgredientChecked }
+          setIgredientCheckedLenght={ setIgredientCheckedLenght }
+          ingredientChecked={ ingredientChecked }
+        />
       </div>
       <div width="360">
         <h2>Instructions</h2>
         <p data-testid="instructions">{ especificRecipe.strInstructions }</p>
       </div>
-      { (food && ingredientIndex === 1) && videoYoutube() }
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          className="footer"
+          id="finish-recipe-btn"
+          disabled={ stateDisabled }
+        >
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }
 
-EspecificRecipe.propTypes = ({
+EspecificRecipeProgress.propTypes = ({
   nameApi: PropTypes.string.isRequired,
   drinkOrMeals: PropTypes.string.isRequired,
   imgAndTitle: PropTypes.string.isRequired,

@@ -1,11 +1,20 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { EspecificRecipe, RecommendedRecipes } from '../components/index';
+import React, { useContext } from 'react';
+import { useHistory as UseHistory, useLocation } from 'react-router-dom';
+import { RecommendedRecipes } from '../components/index';
 import '../components/Footer.css';
+import MyConText from '../context/Context';
+import EspecificRecipe from '../components/EspecificRecipe';
 
 export default function EspecificFood() {
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
+  const history = UseHistory();
+  const { handleIngredientIndex, ingredientIndex } = useContext(MyConText);
+
+  const redirectInProgress = () => {
+    handleIngredientIndex(2);
+    history.push(`/comidas/${id}/in-progress`);
+  };
 
   return (
     <div>
@@ -14,18 +23,20 @@ export default function EspecificFood() {
         id={ id }
         drinkOrMeals="meals"
         imgAndTitle="Meal"
+        objType="comida"
         food
       />
-      <RecommendedRecipes
+      {(ingredientIndex === 1) && <RecommendedRecipes
         nameApi="thecocktaildb"
         drinkOrMeals="drinks"
         imgAndTitle="Drink"
         linkMealOrDrink="bebidas"
-      />
+      />}
       <button
         type="button"
         data-testid="start-recipe-btn"
         className="footer"
+        onClick={ redirectInProgress }
       >
         Iniciar Receita
       </button>
