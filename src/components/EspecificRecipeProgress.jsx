@@ -90,6 +90,37 @@ export default function EspecificRecipeProgress(props) {
     setButtonClicked(blackHeartIcon);
   };
 
+  const handleSaveLocalStorageDone = () => {
+
+    const getCurrentDate = (separator='/') => {
+
+      let newDate = new Date()
+      let date = newDate.getDate();
+      let month = newDate.getMonth() + 1;
+      let year = newDate.getFullYear();
+      
+      return `${date}${separator}${month<10?`0${month}`:`${month}`}${separator}${year}`
+      }
+
+    const objectLocalStorage = {
+      category: especificRecipe.strCategory,
+      name: especificRecipe[`str${imgAndTitle}`],
+      image: especificRecipe[`str${imgAndTitle}Thumb`],
+      srtTags: especificRecipe.strTags,
+      data: getCurrentDate(),
+    };
+    if (localStorage.getItem('RecipesDone') === null) {
+      localStorage.setItem('RecipesDone',
+        JSON.stringify([objectLocalStorage]));
+    } else {
+      localStorage.setItem('RecipesDone',
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem('RecipesDone')),
+          objectLocalStorage,
+        ]));
+    }
+  };
+
   const onClickButton = () => {
     if (buttonClicked === whiteHeartIcon) {
       handleSaveLocalStorage();
@@ -159,6 +190,7 @@ export default function EspecificRecipeProgress(props) {
           className="footer"
           id="finish-recipe-btn"
           disabled={ stateDisabled }
+          onClick={ handleSaveLocalStorageDone }
         >
           Finalizar Receita
         </button>
