@@ -90,32 +90,40 @@ export default function EspecificRecipeProgress(props) {
     setButtonClicked(blackHeartIcon);
   };
 
+  const srtTag = () => {
+    const tag = especificRecipe.strTags;
+    if (tag) {
+      return (tag.split(','));
+    }
+    return ([]);
+  };
+
   const handleSaveLocalStorageDone = () => {
-
-    const getCurrentDate = (separator='/') => {
-
-      let newDate = new Date()
-      let date = newDate.getDate();
-      let month = newDate.getMonth() + 1;
-      let year = newDate.getFullYear();
-      
-      return `${date}${separator}${month<10?`0${month}`:`${month}`}${separator}${year}`
-      }
+    const getCurrentDate = (separator = '/') => {
+      const decimal = 10;
+      const newDate = new Date();
+      const date = newDate.getDate();
+      const month = newDate.getMonth() + 1;
+      const year = newDate.getFullYear();
+      return `${date}${separator}
+      ${month < decimal
+    ? `0${month}` : `${month}`}${separator}${year}`;
+    };
 
     const objectLocalStorage = {
       category: especificRecipe.strCategory,
       name: especificRecipe[`str${imgAndTitle}`],
       image: especificRecipe[`str${imgAndTitle}Thumb`],
-      tags: especificRecipe.srtTags,
+      srtTags: srtTag(),
       data: getCurrentDate(),
     };
-    if (localStorage.getItem('RecipesDone') === null) {
-      localStorage.setItem('RecipesDone',
+    if (localStorage.getItem('doneRecipes') === null) {
+      localStorage.setItem('doneRecipes',
         JSON.stringify([objectLocalStorage]));
     } else {
-      localStorage.setItem('RecipesDone',
+      localStorage.setItem('doneRecipes',
         JSON.stringify([
-          ...JSON.parse(localStorage.getItem('RecipesDone')),
+          ...JSON.parse(localStorage.getItem('doneRecipes')),
           objectLocalStorage,
         ]));
     }

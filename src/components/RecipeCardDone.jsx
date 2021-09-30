@@ -1,41 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import shareIcon from '../images/shareIcon.svg';
 
 export default function RecipeCardDone() {
-    const [] = useState([]);
 
-    const doneRecipes = JSON.parse(localStorage.getItem('RecipesDone'));
-    console.log(doneRecipes);
+  const [localStorageValue, setStorageValue] = useState([]);
+  const getLocalStorage = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+  useEffect(() => {
+    setStorageValue(getLocalStorage);
+    console.log(localStorageValue);
+  }, []);
 
-    const { image, name, category, data, tags } = doneRecipes;
+  return (
+    <div>
+      {localStorageValue.map((index, teste) => (
+        <div key={ index.name }>
+          <img
+            alt={ `foto de ${index.name}` }
+            data-testid={ `${teste}-horizontal-image` }
+            src={ index.image }
+          />
 
-    console.log(tags);
+          <img
+            alt="compartilhar"
+            src={ shareIcon }
+            data-testid={ `${teste}-horizontal-share-btn` }
+          />
 
-    const recipesTag = tags.split(',');
+          <h4 data-testid={ `${teste}-horizontal-top-text` }>{index.category}</h4>
 
-    // function tags() {
-    //     if (getLocalStorage[0].srtTags === null) {
-    //         return [];
-    //     } else {
-    //         getLocalStorage[0].srtTags.split(',');
-    //     }
-    // }
+          <h3 data-testid={ `${teste}-horizontal-name` }>{index.name}</h3>
 
+          <span data-testid={ `${teste}-horizontal-done-date}` }>{index.data}</span>
 
-    return(
-        <div>
-            {doneRecipes.map((doneRecipe, index) => (
-            <div>
-                <img data-testid={`${index}-horizontal-image`} src={image} alt={name} />
-                <img src={shareIcon} data-testid={`${index}-horizontal-share-btn`} />
-                <h4 data-testid={`${index}-horizontal-top-text`}>{category}</h4>
-                <h3 data-testid={`${index}-horizontal-name`}>{name}</h3>
-                <span data-testid={`${index}-horizontal-done-date`}>{data}</span>
-                    {doneRecipe.map(tag => (
-                        <span data-testid={`${index}-${index}-horizontal-tag`}>{tag}</span>
-                    ))}
-            </div>
+          <span>
+            {index.srtTags.map((tagName) => (
+              <p
+                data-testid={ `${teste}-${tagName}-horizontal-tag` }
+                key={ tagName }
+              >
+                {tagName}
+              </p>
             ))}
+          </span>
+
         </div>
-    )
+      ))}
+    </div>
+  );
 }
