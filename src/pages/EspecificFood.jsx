@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { useHistory as UseHistory, useLocation } from 'react-router-dom';
-import { RecommendedRecipes } from '../components/index';
+import { useLocation } from 'react-router-dom';
+import { RecommendedRecipes, ButtonStartRecipe } from '../components/index';
 import '../components/Footer.css';
 import MyConText from '../context/Context';
 import EspecificRecipe from '../components/EspecificRecipe';
@@ -8,13 +8,7 @@ import EspecificRecipe from '../components/EspecificRecipe';
 export default function EspecificFood() {
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
-  const history = UseHistory();
-  const { handleIngredientIndex, ingredientIndex } = useContext(MyConText);
-
-  const redirectInProgress = () => {
-    handleIngredientIndex(2);
-    history.push(`/comidas/${id}/in-progress`);
-  };
+  const { ingredientIndex } = useContext(MyConText);
 
   return (
     <div>
@@ -32,14 +26,11 @@ export default function EspecificFood() {
         imgAndTitle="Drink"
         linkMealOrDrink="bebidas"
       />}
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className="footer"
-        onClick={ redirectInProgress }
-      >
-        Iniciar Receita
-      </button>
+      <ButtonStartRecipe
+        id={ id }
+        localstorage="meals"
+        linkMealOrDrink="comidas"
+      />
     </div>
   );
 }
