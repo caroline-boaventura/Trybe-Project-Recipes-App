@@ -106,7 +106,7 @@ export default function EspecificRecipeProgress(props) {
       category: especificRecipe.strCategory,
       name: especificRecipe[`str${imgAndTitle}`],
       image: especificRecipe[`str${imgAndTitle}Thumb`],
-      srtTags: especificRecipe.strTags,
+      tags: especificRecipe.srtTags,
       data: getCurrentDate(),
     };
     if (localStorage.getItem('RecipesDone') === null) {
