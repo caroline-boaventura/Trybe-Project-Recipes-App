@@ -31,7 +31,7 @@ export default function RecipeCardDone() {
                 <h4 data-testid={`${index}-horizontal-top-text`}>{category}</h4>
                 <h3 data-testid={`${index}-horizontal-name`}>{name}</h3>
                 <span data-testid={`${index}-horizontal-done-date`}>{data}</span>
-                    {recipesTag.map(tag => (
+                    {doneRecipe.map(tag => (
                         <span data-testid={`${index}-${index}-horizontal-tag`}>{tag}</span>
                     ))}
             </div>
