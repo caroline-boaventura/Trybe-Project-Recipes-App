@@ -1,19 +1,61 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Header } from '../components/index';
 import RecipeCardDone from '../components/RecipeCardDone';
 
 export default function DoneRecipes() {
+
+  const [localStorageValue, setStorageValue] = useState([]);
+  const [doneRecipesFiltered, setDoneRecipesFiltered] = useState();
+
+  useEffect(() => {
+    console.log('chamou didmount');
+    const toRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    console.log(toRecipes);
+    setStorageValue(toRecipes);
+    setDoneRecipesFiltered(toRecipes);
+  }, []);
+
+
+  function filterAllType(filter) {
+    if (filter === 'comida') {
+      return setDoneRecipesFiltered(localStorageValue.filter(({ type }) => type === 'comida'));
+    }
+
+    if (filter === 'bebida') {
+      return setDoneRecipesFiltered(localStorageValue.filter(({ type }) => type === 'bebida'));
+    }
+      return setDoneRecipesFiltered(localStorageValue);
+  }
+
   return (
     <>
-      <Header title="Receitas Feitas" visibility={ false } />
-      <div>
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Food</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <Header title="Receitas Feitas" visibility={ false } />
+        <div>
+        <button 
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => filterAllType() }
+        >
+          All
+        </button>
+        <button 
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => filterAllType('comida') }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => filterAllType('bebida') }
+        >
+          Drinks
+        </button>
       </div>
-      <div>
-        <RecipeCardDone />
-      </div>
+        <div>
+          { doneRecipesFiltered && <RecipeCardDone localStorageValue={ doneRecipesFiltered } /> }
+        </div>
     </>
 
   );
