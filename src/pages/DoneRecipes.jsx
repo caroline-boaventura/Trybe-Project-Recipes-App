@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from '../components/index';
 import RecipeCardDone from '../components/RecipeCardDone';
 
 export default function DoneRecipes() {
-
   const [localStorageValue, setStorageValue] = useState([]);
   const [doneRecipesFiltered, setDoneRecipesFiltered] = useState();
 
@@ -15,30 +14,31 @@ export default function DoneRecipes() {
     setDoneRecipesFiltered(toRecipes);
   }, []);
 
-
   function filterAllType(filter) {
     if (filter === 'comida') {
-      return setDoneRecipesFiltered(localStorageValue.filter(({ type }) => type === 'comida'));
+      return setDoneRecipesFiltered(localStorageValue
+        .filter(({ type }) => type === 'comida'));
     }
 
     if (filter === 'bebida') {
-      return setDoneRecipesFiltered(localStorageValue.filter(({ type }) => type === 'bebida'));
+      return setDoneRecipesFiltered(localStorageValue
+        .filter(({ type }) => type === 'bebida'));
     }
-      return setDoneRecipesFiltered(localStorageValue);
+    return setDoneRecipesFiltered(localStorageValue);
   }
 
   return (
     <>
-        <Header title="Receitas Feitas" visibility={ false } />
-        <div>
-        <button 
+      <Header title="Receitas Feitas" visibility={ false } />
+      <div>
+        <button
           type="button"
           data-testid="filter-by-all-btn"
           onClick={ () => filterAllType() }
         >
           All
         </button>
-        <button 
+        <button
           type="button"
           data-testid="filter-by-food-btn"
           onClick={ () => filterAllType('comida') }
@@ -53,9 +53,12 @@ export default function DoneRecipes() {
           Drinks
         </button>
       </div>
-        <div>
-          { doneRecipesFiltered && <RecipeCardDone localStorageValue={ doneRecipesFiltered } /> }
-        </div>
+      <div>
+        {doneRecipesFiltered
+        && <RecipeCardDone
+          localStorageValue={ doneRecipesFiltered }
+        />}
+      </div>
     </>
 
   );

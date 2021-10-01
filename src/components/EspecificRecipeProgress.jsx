@@ -100,7 +100,9 @@ export default function EspecificRecipeProgress(props) {
 
   const handleSaveLocalStorageDone = () => {
     const getCurrentDate = new Date();
-    const dataValue = `${getCurrentDate.getDate()}/${getCurrentDate.getMonth()}/${getCurrentDate.getFullYear()}`;
+    const dataValue = `${getCurrentDate.getDate()}
+      /${getCurrentDate.getMonth()}
+      /${getCurrentDate.getFullYear()}`;
 
     const objectLocalStorage = {
       id: especificRecipe[`id${imgAndTitle}`],
@@ -111,7 +113,7 @@ export default function EspecificRecipeProgress(props) {
       name: especificRecipe[`str${imgAndTitle}`],
       image: especificRecipe[`str${imgAndTitle}Thumb`],
       tags: srtTag(),
-      doneDate: new Date(),
+      doneDate: dataValue,
     };
     if (localStorage.getItem('doneRecipes') === null) {
       localStorage.setItem('doneRecipes',
