@@ -7,11 +7,20 @@ export default function User() {
     localStorage.clear();
   }
 
-  const { email } = JSON.parse(localStorage.getItem('user'));
+  const handleEmailLocalStorage = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user) {
+      return (
+        <h1 data-testid="profile-email">{ user.email }</h1>
+      );
+    }
+  };
+
   return (
     <div>
       <Header title="Perfil" visibility={ false } />
-      <h1 data-testid="profile-email">{email}</h1>
+      { handleEmailLocalStorage() }
       <Link
         to="/receitas-feitas"
       >
