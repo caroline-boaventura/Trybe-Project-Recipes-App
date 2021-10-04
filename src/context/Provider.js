@@ -10,6 +10,7 @@ function Provider({ children }) {
   const [categoryName, setCategoryName] = useState('');
   const [ingredientIndex, setIngredientIndex] = useState(1);
   const [ingredient, setIngredient] = useState('');
+  const [optionArea, setOptionArea] = useState('All');
 
   const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
 
@@ -114,6 +115,8 @@ function Provider({ children }) {
     setUrlCopy,
     ingredient,
     setIngredient,
+    optionArea,
+    setOptionArea,
   };
 
   return (
