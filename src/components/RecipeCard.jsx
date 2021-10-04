@@ -1,20 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import './RecipeCard.css';
 import { Link } from 'react-router-dom';
+import MyConText from '../context/Context';
 
 const TWELVE = 12;
 
 export default function RecipeCard(props) {
   const [recipeCardList, setRecipeCardList] = useState([]);
-  const { nameApi, drinkOrMeals, imgAndTitle, linkMealOrDrink } = props;
+  const { nameApi, imgAndTitle, linkMealOrDrink, drinkOrMeals } = props;
+  const { ingredient } = useContext(MyConText);
 
   const fetchCategories = async () => {
-    const results = await fetch(`https://www.${nameApi}.com/api/json/v1/1/search.php?s=`)
-      .then((response) => response.json())
-      .then((res) => res[drinkOrMeals]);
+    if (ingredient) {
+      const results = await fetch(`https://www.${nameApi}.com/api/json/v1/1/filter.php?i=${ingredient}`)
+        .then((response) => (response.json()))
+        .then((res) => res[drinkOrMeals]);
+      setRecipeCardList([...results]);
+    } else {
+      const results = await fetch(`https://www.${nameApi}.com/api/json/v1/1/search.php?s=`)
+        .then((response) => response.json())
+        .then((res) => res[drinkOrMeals]);
 
-    setRecipeCardList([...results]);
+      setRecipeCardList([...results]);
+    }
   };
 
   useEffect(() => {
