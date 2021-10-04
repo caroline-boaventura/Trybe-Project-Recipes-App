@@ -5,12 +5,14 @@ import { RecommendedRecipes,
 import '../components/Footer.css';
 import MyConText from '../context/Context';
 import EspecificRecipe from '../components/EspecificRecipe';
+import '../components/RecipeCard.css';
 
 export default function EspecificFood() {
   const [controlButton, setControlButton] = useState(1);
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
   const { ingredientIndex } = useContext(MyConText);
+  const [displayButton, setDisplayButton] = useState('displayInBlock');
 
   const handleButtonsContinueAndStart = () => {
     const getLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -26,8 +28,19 @@ export default function EspecificFood() {
     }
   };
 
+  const handleRecipeDone = () => {
+    const getLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (getLocalStorage) {
+      const findId = getLocalStorage.find((recipe) => recipe.id === id);
+      if (findId) {
+        setDisplayButton('displayNone');
+      }
+    }
+  };
+
   useEffect(() => {
     handleButtonsContinueAndStart();
+    handleRecipeDone();
   }, []);
 
   return (
@@ -51,6 +64,7 @@ export default function EspecificFood() {
         localstorage="meals"
         linkMealOrDrink="comidas"
         controlButton={ controlButton }
+        classNameButton={ displayButton }
       />
     </div>
   );

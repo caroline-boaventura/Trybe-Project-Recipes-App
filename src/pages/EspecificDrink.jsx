@@ -9,6 +9,7 @@ export default function EspecificDrink() {
   const { pathname } = useLocation();
   const [controlButton, setControlButton] = useState(1);
   const id = pathname.split('/')[2];
+  const [displayButton, setDisplayButton] = useState('displayInBlock');
 
   const handleButtonsContinueAndStart = () => {
     const getLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -24,8 +25,19 @@ export default function EspecificDrink() {
     }
   };
 
+  const handleRecipeDone = () => {
+    const getLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (getLocalStorage) {
+      const findId = getLocalStorage.find((recipe) => recipe.id === id);
+      if (findId) {
+        setDisplayButton('displayNone');
+      }
+    }
+  };
+
   useEffect(() => {
     handleButtonsContinueAndStart();
+    handleRecipeDone();
   }, []);
 
   return (
@@ -49,15 +61,8 @@ export default function EspecificDrink() {
         localstorage="cocktails"
         linkMealOrDrink="bebidas"
         controlButton={ controlButton }
+        classNameButton={ displayButton }
       />
-      {/* { (controlButton === 1) ? <ButtonStartRecipe
-        id={ id }
-        localstorage="cocktails"
-        linkMealOrDrink="bebidas"
-      /> : <ButtonContinueRecipe
-        id={ id }
-        linkMealOrDrink="bebidas"
-      />} */}
     </div>
   );
 }

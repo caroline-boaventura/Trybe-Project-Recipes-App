@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function ButtonStartRecipe(props) {
   const history = UseHistory();
-  const { id, localstorage, linkMealOrDrink, controlButton } = props;
+  const { id, localstorage, linkMealOrDrink, controlButton, classNameButton } = props;
 
   const redirectInProgress = () => {
     history.push(`/${linkMealOrDrink}/${id}/in-progress`);
@@ -47,7 +47,7 @@ export default function ButtonStartRecipe(props) {
       type="button"
       data-testid="start-recipe-btn"
       id="start-button"
-      className="footer"
+      className={ `footer ${classNameButton}` }
       onClick={ redirectInProgress }
     >
       Iniciar Receita
@@ -60,4 +60,5 @@ ButtonStartRecipe.propTypes = ({
   localstorage: PropTypes.string.isRequired,
   linkMealOrDrink: PropTypes.string.isRequired,
   controlButton: PropTypes.number.isRequired,
+  classNameButton: PropTypes.string.isRequired,
 });
