@@ -9,7 +9,6 @@ export default function Header(props) {
   const history = UseHistory();
 
   const profile = () => {
-    console.log(history);
     history.push('/perfil');
   };
 

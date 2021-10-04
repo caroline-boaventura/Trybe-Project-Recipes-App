@@ -1,14 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { RecommendedRecipes, ButtonStartRecipe } from '../components/index';
+import { RecommendedRecipes,
+  ButtonStartRecipe } from '../components/index';
 import '../components/Footer.css';
 import MyConText from '../context/Context';
 import EspecificRecipe from '../components/EspecificRecipe';
 
 export default function EspecificFood() {
+  const [controlButton, setControlButton] = useState(1);
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
   const { ingredientIndex } = useContext(MyConText);
+
+  const handleButtonsContinueAndStart = () => {
+    const getLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+    if (getLocalStorage) {
+      const mealsObj = getLocalStorage.meals;
+      if (mealsObj) {
+        const verifyIdInMails = mealsObj[id];
+        if (verifyIdInMails) {
+          setControlButton(2);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleButtonsContinueAndStart();
+  }, []);
 
   return (
     <div>
@@ -30,6 +50,7 @@ export default function EspecificFood() {
         id={ id }
         localstorage="meals"
         linkMealOrDrink="comidas"
+        controlButton={ controlButton }
       />
     </div>
   );

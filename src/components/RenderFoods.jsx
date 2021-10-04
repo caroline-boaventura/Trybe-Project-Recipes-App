@@ -13,7 +13,7 @@ export default function RenderFoods() {
       if (mealState.meals.length === 1) {
         history.push(`/comidas/${comidas.meals[0].idMeal}`);
       } else {
-        console.log('oi');
+        return null;
       }
     };
 

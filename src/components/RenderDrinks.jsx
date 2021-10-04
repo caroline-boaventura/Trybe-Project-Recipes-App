@@ -14,7 +14,7 @@ export default function RenderDrinks() {
       if (drinkState.drinks.length === 1) {
         history.push(`/bebidas/${bebidas.drinks[0].idDrink}`);
       } else {
-        console.log('oi');
+        return null;
       }
     };
 
