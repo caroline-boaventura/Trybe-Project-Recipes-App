@@ -3,7 +3,6 @@ import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
 import { Header } from '../components/index';
 
 export default function FavoriteRecipes() {
-
   const [localStorageValue, setLocalStorageValue] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState();
 
@@ -37,8 +36,8 @@ export default function FavoriteRecipes() {
 
   return (
     <>
-    <Header title="Receitas Favoritas" visibility={ false } />
-    <div>
+      <Header title="Receitas Favoritas" visibility={ false } />
+      <div>
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -62,7 +61,10 @@ export default function FavoriteRecipes() {
         </button>
       </div>
       <div>
-        <FavoriteRecipeCard localStorageValue={ favoriteRecipes } removeRecipes={ removeRecipes } />
+        <FavoriteRecipeCard
+          localStorageValue={ favoriteRecipes }
+          removeRecipes={ removeRecipes }
+        />
       </div>
     </>
   );
