@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory as UseHistory } from 'react-router-dom';
 import { Header, Footer } from '../components/index';
+import MyConText from '../context/Context';
 
 export default function ExploreFoodsByIngredient() {
   const [ingredients, setIngredientIndex] = useState('unfetched');
   const [fetched, setFetched] = useState(false);
+  const { setIngredient } = useContext(MyConText);
+  const history = UseHistory();
 
   const getIngredients = async () => {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
@@ -15,14 +18,23 @@ export default function ExploreFoodsByIngredient() {
 
   const TWELVE = 12;
 
+  function saveIngredientContext(ingredient) {
+    setIngredient(ingredient);
+    history.push('/comidas');
+  }
+
   function forEachFunc({ strIngredient }, index) {
     if (index < TWELVE) {
       return (
-        <Link to="/comidas/">
+        <button
+          type="button"
+          onClick={ () => saveIngredientContext(strIngredient) }
+        >
           <div
             className="recipeCard"
             data-testid={ `${index}-ingredient-card` }
             key={ index }
+            value={ strIngredient }
           >
             <h4
               data-testid={ `${index}-card-name` }
@@ -35,7 +47,7 @@ export default function ExploreFoodsByIngredient() {
               alt={ strIngredient }
             />
           </div>
-        </Link>
+        </button>
       );
     }
   }
