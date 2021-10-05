@@ -1,8 +1,43 @@
-@media screen and (max-width: 360px) {
+@media screen and ( max-width : 360px ) {
+
+  /* <-- Search Bar --> */
+  .container-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .container-search div {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .input-search {
+    background-color: ghostwhite;
+    border: 1px solid darkred;
+    color: darkred;
+    margin-bottom: 10px;
+  }
+
+  .input-search:focus {
+    border: 0;
+    box-shadow: 0 0 0.5em darkred;
+  }
+
+  .conteiner-radio label input :checked {
+    background-color: darkred;
+    border: 1px solid darkred;
+    box-shadow: 0 0 0 0;
+  }
+
+  .container-search div label {
+    color: darkred;
+  }
+
   /* <-- Login Page --> */
   .login-panel {
     align-items: center;
-    background-color: rgb(248, 248, 255);
+    background-color: ghostwhite;
     display: flex;
     flex-direction: column;
     height: 640px;
@@ -21,43 +56,42 @@
     width: 100px;
   }
 
-  .login-panel form input:focus {
-    border: 0;
-    box-shadow: 0 0 0.5em rgb(139, 0, 0);
+  .login-panel form input {
+    background-color: ghostwhite;
+    border: 1px solid darkred;
+    color: darkred;
   }
 
-  .login-panel form input {
-    background-color: rgb(248, 248, 255);
-    border: 1px solid rgb(139, 0, 0);
-    color: rgb(139, 0, 0);
+  .login-panel form input:focus {
+    border: 0;
+    box-shadow: 0 0 0.5em darkred;
   }
 
   .btn {
-    background-color: rgb(139, 0, 0);
+    background-color: darkred;
   }
 
   /* <-- Header --> */
   .container-header {
     align-items: center;
+    background-color: darkred;
+    color: ghostwhite;
     display: flex;
     height: 3.5em;
     justify-content: space-between;
     margin-bottom: 20px;
-    background-color: rgb(139, 0, 0);
-    color: rgb(248, 248, 255);
   }
 
   .container-header button {
-    border: 0;
     background-color: transparent;
-    
+    border: 0;
   }
 
   .fa-user, .fa-search {
+    color: ghostwhite;
     font-size: 25px;
-    margin: 0 10px;
-    color: rgb(248, 248, 255);
     font-weight: 700;
+    margin: 0 10px;
   }
 
   /* <-- Categories --> */
@@ -68,61 +102,18 @@
   }
 
   .container-categories button {
-    font-size: 15px;
-    border: 1px solid rgb(139, 0, 0);
-    background-color: rgb(248, 248, 255);
+    background-color: ghostwhite;
+    border: 1px solid darkred;
     border-radius: 15px;
-    color: rgb(139, 0, 0);
+    color: darkred;
+    font-size: 15px;
     margin: 5px 10px;
   }
 
   .container-categories button:hover {
-    background-color: rgb(139, 0, 0);
-    color: rgb(248, 248, 255);
+    background-color: darkred;
+    color: ghostwhite;
   }
-
-  /* <-- Search Bar --> */
-  .container-search {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .container-search div {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .container-search div label input {
-    margin-left: 5px;
-    margin-bottom: 12px;
-  }
-
-  .input-search {
-    background-color: rgb(248, 248, 255);
-    border: 1px solid rgb(139, 0, 0);
-    color: rgb(139, 0, 0);
-    margin-bottom: 10px;
-  }
-
-  .input-search:focus {
-    border: 0;
-    box-shadow: 0 0 0.5em rgb(139, 0, 0);
-  }
-
-  .container-search div label input:checked {
-    background-color:rgb(139, 0, 0);
-    border: 1px solid rgb(139, 0, 0);
-    box-shadow: 0 0 0 0;
-  }
-
-  .container-search div label {
-    color: rgb(139, 0, 0);
-  }
-
-
 
 
 }
-
-

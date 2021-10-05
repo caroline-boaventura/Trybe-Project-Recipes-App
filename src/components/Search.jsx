@@ -17,7 +17,7 @@ export default function Search() {
         className="form-control input-search"
         autoComplete="off"
       />
-      <div>
+      <div className="conteiner-radio">
         <label className="form-check-label" htmlFor="ingredient-search-radio">
           ingredient
           <input
