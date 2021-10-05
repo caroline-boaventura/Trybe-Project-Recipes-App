@@ -1,0 +1,128 @@
+@media screen and (max-width: 360px) {
+  /* <-- Login Page --> */
+  .login-panel {
+    align-items: center;
+    background-color: rgb(248, 248, 255);
+    display: flex;
+    flex-direction: column;
+    height: 640px;
+    justify-content: center;
+    width: 360px;
+  }
+
+  .login-panel form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 50px;
+  }
+
+  .login-panel img {
+    width: 100px;
+  }
+
+  .login-panel form input:focus {
+    border: 0;
+    box-shadow: 0 0 0.5em rgb(139, 0, 0);
+  }
+
+  .login-panel form input {
+    background-color: rgb(248, 248, 255);
+    border: 1px solid rgb(139, 0, 0);
+    color: rgb(139, 0, 0);
+  }
+
+  .btn {
+    background-color: rgb(139, 0, 0);
+  }
+
+  /* <-- Header --> */
+  .container-header {
+    align-items: center;
+    display: flex;
+    height: 3.5em;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: rgb(139, 0, 0);
+    color: rgb(248, 248, 255);
+  }
+
+  .container-header button {
+    border: 0;
+    background-color: transparent;
+    
+  }
+
+  .fa-user, .fa-search {
+    font-size: 25px;
+    margin: 0 10px;
+    color: rgb(248, 248, 255);
+    font-weight: 700;
+  }
+
+  /* <-- Categories --> */
+  .container-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .container-categories button {
+    font-size: 15px;
+    border: 1px solid rgb(139, 0, 0);
+    background-color: rgb(248, 248, 255);
+    border-radius: 15px;
+    color: rgb(139, 0, 0);
+    margin: 5px 10px;
+  }
+
+  .container-categories button:hover {
+    background-color: rgb(139, 0, 0);
+    color: rgb(248, 248, 255);
+  }
+
+  /* <-- Search Bar --> */
+  .container-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .container-search div {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .container-search div label input {
+    margin-left: 5px;
+    margin-bottom: 12px;
+  }
+
+  .input-search {
+    background-color: rgb(248, 248, 255);
+    border: 1px solid rgb(139, 0, 0);
+    color: rgb(139, 0, 0);
+    margin-bottom: 10px;
+  }
+
+  .input-search:focus {
+    border: 0;
+    box-shadow: 0 0 0.5em rgb(139, 0, 0);
+  }
+
+  .container-search div label input:checked {
+    background-color:rgb(139, 0, 0);
+    border: 1px solid rgb(139, 0, 0);
+    box-shadow: 0 0 0 0;
+  }
+
+  .container-search div label {
+    color: rgb(139, 0, 0);
+  }
+
+
+
+
+}
+
+

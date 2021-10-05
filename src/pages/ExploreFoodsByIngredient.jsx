@@ -52,6 +52,7 @@ export default function ExploreFoodsByIngredient() {
     <div>
       <Header title="Explorar Ingredientes" visibility={ false } />
       { fetched ? createCards() : <h1>Carregando...</h1>}
+      { console.log(ingredients) }
       <Footer />
     </div>
   );

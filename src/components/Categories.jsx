@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import MyConText from '../context/Context';
+import '../pages/index.css';
 
 const FIVE = 5;
 const THREE = 3;
@@ -54,7 +55,7 @@ export default function Categories(props) {
   };
 
   return (
-    <div>
+    <div className="container-categories">
       <button
         data-testid="All-category-filter"
         type="button"
