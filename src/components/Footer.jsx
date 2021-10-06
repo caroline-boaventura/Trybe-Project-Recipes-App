@@ -1,8 +1,6 @@
 import React from 'react';
 import { useHistory as UseHistory } from 'react-router-dom';
-import drinkIcon from '../images/drinkIcon.svg';
-import exploreIcon from '../images/exploreIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import { Menu, Icon } from 'semantic-ui-react';
 import './Footer.css';
 
 export default function Footer() {
@@ -22,24 +20,31 @@ export default function Footer() {
 
   return (
     <div data-testid="footer" className="footer">
-      <button
-        type="button"
-        onClick={ redirectDrinks }
-      >
-        <img src={ drinkIcon } alt="Drink Icon" data-testid="drinks-bottom-btn" />
-      </button>
-      <button
-        type="button"
-        onClick={ redirectExplore }
-      >
-        <img src={ exploreIcon } alt="Explore Icon" data-testid="explore-bottom-btn" />
-      </button>
-      <button
-        type="button"
-        onClick={ redirectMeals }
-      >
-        <img src={ mealIcon } alt="Meal Icon" data-testid="food-bottom-btn" />
-      </button>
+      <Menu compact icon="labeled">
+        <Menu.Item
+          name="gamepad"
+          onClick={ redirectDrinks }
+        >
+          <Icon name="beer" />
+          Bebidas
+        </Menu.Item>
+
+        <Menu.Item
+          name="paper plane"
+          onClick={ redirectExplore }
+        >
+          <Icon name="paper plane" />
+          Explorar
+        </Menu.Item>
+
+        <Menu.Item
+          name="utensils"
+          onClick={ redirectMeals }
+        >
+          <Icon name="utensils" />
+          Comidas
+        </Menu.Item>
+      </Menu>
     </div>
   );
 }

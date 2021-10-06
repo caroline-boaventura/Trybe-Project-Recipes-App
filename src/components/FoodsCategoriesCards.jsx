@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Image, Grid, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import MyConText from '../context/Context';
 import './RecipeCard.css';
@@ -25,26 +26,29 @@ export default function FoodsCategoriesCards() {
     fetchFoodCategories();
   }, []);
 
-  const forEachFunc = ({ strMeal, strMealThumb, idMeal }, index) => {
+  const forEachFunc = ({
+    strMeal, strMealThumb, idMeal }, index) => {
     if (index < TWELVE) {
       return (
         <Link to={ `/comidas/${idMeal}` }>
-          <div
-            className="recipeCard"
-            data-testid={ `${index}-recipe-card` }
-            key={ index }
-          >
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ strMealThumb }
-              alt={ strMeal }
-            />
-            <h4
-              data-testid={ `${index}-card-name` }
-            >
-              { strMeal }
-            </h4>
-          </div>
+          <Grid columns={ 1 }>
+            <Grid.Column>
+              <Segment padded>
+                <Image
+                  fluid
+                  label={ {
+                    as: 'a',
+                    color: 'black',
+                    content: strMeal,
+                    icon: 'spoon',
+                    ribbon: true,
+                    size: 'big',
+                  } }
+                  src={ strMealThumb }
+                />
+              </Segment>
+            </Grid.Column>
+          </Grid>
         </Link>
       );
     }

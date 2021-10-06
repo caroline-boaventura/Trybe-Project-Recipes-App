@@ -1,5 +1,4 @@
 @media screen and ( max-width : 360px ) {
-
   /* <-- Search Bar --> */
   .container-search {
     display: flex;
@@ -77,9 +76,9 @@
     background-color: darkred;
     color: ghostwhite;
     display: flex;
-    height: 3.5em;
+    /* height: 3.5em; */
     justify-content: space-between;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
 
   .container-header button {
