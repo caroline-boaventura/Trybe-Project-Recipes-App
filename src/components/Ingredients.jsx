@@ -31,7 +31,7 @@ export default function Ingredients(props) {
               { `${ingredient[0]} - ${ingredient[1]}` }
             </p>
           );
-        } return console.log('oi');
+        } return null;
       }) }
     </div>
   );

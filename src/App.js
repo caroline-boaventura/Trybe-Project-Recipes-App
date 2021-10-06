@@ -17,7 +17,8 @@ import {
   User,
   DoneRecipes,
   FavoriteRecipes,
-  EspecificDrinkProgress } from './pages';
+  EspecificDrinkProgress,
+  NotFound } from './pages';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route exact path="/perfil" component={ User } />
         <Route exact path="/receitas-feitas" component={ DoneRecipes } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route component={ NotFound } />
       </Switch>
     </BrowserRouter>
   );

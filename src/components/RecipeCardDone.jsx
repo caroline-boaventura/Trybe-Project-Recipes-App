@@ -15,7 +15,6 @@ export default function RecipeCardDone({ localStorageValue }) {
     const FOUR = 4000;
     if (type === 'bebida') {
       copytoclipboard(`http://localhost:3000/bebidas/${id}`);
-      console.log('bebida copiada');
       setCopied(true);
       return setTimeout(() => setCopied(false), FOUR);
     }
@@ -40,7 +39,6 @@ export default function RecipeCardDone({ localStorageValue }) {
 
   return (
     <div>
-      {console.log(localStorageValue)}
       {localStorageValue && localStorageValue.map((index, teste) => (
         <div key={ index.name }>
           <Link

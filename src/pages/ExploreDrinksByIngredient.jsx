@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory as UseHistory } from 'react-router-dom';
 import { Header, Footer } from '../components/index';
+import MyConText from '../context/Context';
 
 export default function ExploreDrinksByIngredient() {
   const [ingredients, setIngredientIndex] = useState('unfetched');
   const [fetched, setFetched] = useState(false);
+  const { setIngredient } = useContext(MyConText);
+  const history = UseHistory();
 
   const getIngredients = async () => {
     const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
@@ -15,10 +18,18 @@ export default function ExploreDrinksByIngredient() {
 
   const TWELVE = 12;
 
+  function saveIngredientContext(ingredient) {
+    setIngredient(ingredient);
+    history.push('/bebidas');
+  }
+
   function forEachFunc({ strIngredient1 }, index) {
     if (index < TWELVE) {
       return (
-        <Link to="/bebidas">
+        <button
+          type="button"
+          onClick={ () => saveIngredientContext(strIngredient1) }
+        >
           <div
             className="recipeCard"
             data-testid={ `${index}-ingredient-card` }
@@ -35,7 +46,7 @@ export default function ExploreDrinksByIngredient() {
               alt={ strIngredient1 }
             />
           </div>
-        </Link>
+        </button>
       );
     }
   }

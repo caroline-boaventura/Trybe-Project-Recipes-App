@@ -9,3 +9,5 @@ export { default as RecommendedRecipes } from './RecommendedRecipes';
 export { default as Ingredients } from './Ingredients';
 export { default as IngredientsInProgress } from './IngredientsInProgress';
 export { default as ButtonStartRecipe } from './ButtonStartRecipe';
+export { default as ButtonContinueRecipe } from './ButtonContinueRecipe';
+export { default as DropDownArea } from './DropDownArea';

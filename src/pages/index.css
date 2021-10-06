@@ -1,0 +1,119 @@
+@media screen and ( max-width : 360px ) {
+
+  /* <-- Search Bar --> */
+  .container-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .container-search div {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .input-search {
+    background-color: ghostwhite;
+    border: 1px solid darkred;
+    color: darkred;
+    margin-bottom: 10px;
+  }
+
+  .input-search:focus {
+    border: 0;
+    box-shadow: 0 0 0.5em darkred;
+  }
+
+  .conteiner-radio label input :checked {
+    background-color: darkred;
+    border: 1px solid darkred;
+    box-shadow: 0 0 0 0;
+  }
+
+  .container-search div label {
+    color: darkred;
+  }
+
+  /* <-- Login Page --> */
+  .login-panel {
+    align-items: center;
+    background-color: ghostwhite;
+    display: flex;
+    flex-direction: column;
+    height: 640px;
+    justify-content: center;
+    width: 360px;
+  }
+
+  .login-panel form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 50px;
+  }
+
+  .login-panel img {
+    width: 100px;
+  }
+
+  .login-panel form input {
+    background-color: ghostwhite;
+    border: 1px solid darkred;
+    color: darkred;
+  }
+
+  .login-panel form input:focus {
+    border: 0;
+    box-shadow: 0 0 0.5em darkred;
+  }
+
+  .btn {
+    background-color: darkred;
+  }
+
+  /* <-- Header --> */
+  .container-header {
+    align-items: center;
+    background-color: darkred;
+    color: ghostwhite;
+    display: flex;
+    height: 3.5em;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .container-header button {
+    background-color: transparent;
+    border: 0;
+  }
+
+  .fa-user, .fa-search {
+    color: ghostwhite;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 10px;
+  }
+
+  /* <-- Categories --> */
+  .container-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .container-categories button {
+    background-color: ghostwhite;
+    border: 1px solid darkred;
+    border-radius: 15px;
+    color: darkred;
+    font-size: 15px;
+    margin: 5px 10px;
+  }
+
+  .container-categories button:hover {
+    background-color: darkred;
+    color: ghostwhite;
+  }
+
+
+}

@@ -162,7 +162,6 @@ export default function EspecificRecipeProgress(props) {
 
   return (
     <div>
-      {console.log(especificRecipe)}
       <img
         data-testid="recipe-photo"
         src={ especificRecipe[`str${imgAndTitle}Thumb`] }

@@ -48,7 +48,6 @@ export default function RecommendedRecipes(props) {
   };
   return (
     <div>
-      {console.log(recommendations)}
       <h2>Recommended</h2>
       <div className="container-recomendation-card">
         { recommendations.map(forEachFunc) }

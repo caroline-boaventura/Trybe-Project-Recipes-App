@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory as UseHistory } from 'react-router-dom';
+import './index.css';
+import cookLogo from '../images/cookLogo.png';
 
 export default function Login() {
   const history = UseHistory();
@@ -32,25 +34,40 @@ export default function Login() {
     setPassword(event.target.value);
     isValid();
   }
+
+  const button = (
+    <button
+      className="btn btn-danger"
+      disabled
+      data-testid="login-submit-btn"
+      type="button"
+    >
+      Entrar
+    </button>);
+
   return (
     <div className="login-panel">
+      <img src={ cookLogo } alt="cook_logo" />
       <form>
-        <label htmlFor="email">
-          Email:
+        <label htmlFor="email" className="input-group mb-3">
           <input
             data-testid="email-input"
             type="email"
             name="email"
             onChange={ (e) => handleChangeEmail(e) }
+            className="form-control"
+            placeholder="E-mail"
+            autoComplete="off"
           />
         </label>
-        <label htmlFor="password">
-          Password:
+        <label htmlFor="password" className="input-group mb-3">
           <input
             data-testid="password-input"
             type="password"
             name="password"
             onChange={ (e) => handleChangePassword(e) }
+            className="form-control"
+            placeholder="Senha"
           />
         </label>
         {valid
@@ -59,11 +76,12 @@ export default function Login() {
               data-testid="login-submit-btn"
               type="button"
               onClick={ () => handleClick() }
+              className="btn btn-danger"
             >
               Entrar
 
             </button>)
-          : <button disabled data-testid="login-submit-btn" type="button">Entrar</button>}
+          : button}
       </form>
     </div>
   );

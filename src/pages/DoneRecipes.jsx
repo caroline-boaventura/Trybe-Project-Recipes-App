@@ -7,9 +7,7 @@ export default function DoneRecipes() {
   const [doneRecipesFiltered, setDoneRecipesFiltered] = useState();
 
   useEffect(() => {
-    console.log('chamou didmount');
     const toRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    console.log(toRecipes);
     setStorageValue(toRecipes);
     setDoneRecipesFiltered(toRecipes);
   }, []);
