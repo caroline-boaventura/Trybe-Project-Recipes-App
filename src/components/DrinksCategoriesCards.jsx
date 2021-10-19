@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Image, Grid, Segment } from 'semantic-ui-react';
 import MyConText from '../context/Context';
 import './RecipeCard.css';
 
@@ -29,22 +30,24 @@ export default function DrinksCategoriesCards() {
     if (index < TWELVE) {
       return (
         <Link to={ `/bebidas/${idDrink}` }>
-          <div
-            className="recipeCard"
-            data-testid={ `${index}-recipe-card` }
-            key={ index }
-          >
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ strDrinkThumb }
-              alt={ strDrink }
-            />
-            <h4
-              data-testid={ `${index}-card-name` }
-            >
-              { strDrink }
-            </h4>
-          </div>
+          <Grid columns={ 1 }>
+            <Grid.Column>
+              <Segment padded>
+                <Image
+                  fluid
+                  label={ {
+                    as: 'a',
+                    color: 'black',
+                    content: strDrink,
+                    icon: 'spoon',
+                    ribbon: true,
+                    size: 'big',
+                  } }
+                  src={ strDrinkThumb }
+                />
+              </Segment>
+            </Grid.Column>
+          </Grid>
         </Link>
       );
     }

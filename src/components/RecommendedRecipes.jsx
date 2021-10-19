@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './RecommendedRecipes.css';
+import '../pages/index.css';
 
 const SIX = 6;
 
@@ -47,7 +48,7 @@ export default function RecommendedRecipes(props) {
     }
   };
   return (
-    <div>
+    <div className="container-recommended">
       <h2>Recommended</h2>
       <div className="container-recomendation-card">
         { recommendations.map(forEachFunc) }

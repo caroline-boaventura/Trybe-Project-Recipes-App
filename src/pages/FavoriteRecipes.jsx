@@ -38,27 +38,29 @@ export default function FavoriteRecipes() {
     <>
       <Header title="Receitas Favoritas" visibility={ false } />
       <div>
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          onClick={ () => filterAllType() }
-        >
-          All
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-food-btn"
-          onClick={ () => filterAllType('comida') }
-        >
-          Food
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-drink-btn"
-          onClick={ () => filterAllType('bebida') }
-        >
-          Drinks
-        </button>
+        <div className="container-buttons">
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ () => filterAllType() }
+          >
+            All
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-food-btn"
+            onClick={ () => filterAllType('comida') }
+          >
+            Food
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            onClick={ () => filterAllType('bebida') }
+          >
+            Drinks
+          </button>
+        </div>
       </div>
       <div>
         <FavoriteRecipeCard

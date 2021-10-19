@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import './RecipeCard.css';
 import { Link } from 'react-router-dom';
+import { Image, Grid, Label, Segment } from 'semantic-ui-react';
 import MyConText from '../context/Context';
 
 const TWELVE = 12;
@@ -47,22 +48,45 @@ export default function RecipeCard(props) {
     if (index < TWELVE) {
       return (
         <Link to={ `/${linkMealOrDrink}/${id}` }>
-          <div
-            className="recipeCard"
-            data-testid={ `${index}-recipe-card` }
-            key={ index }
-          >
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ recipeCard[`str${imgAndTitle}Thumb`] }
-              alt={ recipeCard[`str${imgAndTitle}`] }
-            />
-            <h4
-              data-testid={ `${index}-card-name` }
-            >
-              {recipeCard[`str${imgAndTitle}`]}
-            </h4>
-          </div>
+          <Grid columns={ 1 }>
+            <Grid.Column>
+              <Segment padded compact>
+                {recipeCard.strArea !== undefined ? (
+                  <Label
+                    attached="bottom"
+                    size="big"
+                    horizontal
+                    alignment
+                  >
+                    {`${recipeCard.strArea}`}
+
+                  </Label>)
+                  : (
+                    <Label
+                      attached="bottom"
+                      size="big"
+                      horizontal
+                      alignment
+                    >
+                      {`${recipeCard.strAlcoholic}`}
+
+                    </Label>
+                  )}
+                <Image
+                  fluid
+                  label={ {
+                    as: 'a',
+                    color: 'black',
+                    content: recipeCard[`str${imgAndTitle}`],
+                    icon: 'spoon',
+                    ribbon: true,
+                    size: 'big',
+                  } }
+                  src={ recipeCard[`str${imgAndTitle}Thumb`] }
+                />
+              </Segment>
+            </Grid.Column>
+          </Grid>
         </Link>
       );
     }

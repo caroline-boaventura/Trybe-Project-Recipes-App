@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory as UseHistory } from 'react-router-dom';
 import '../pages/index.css';
+import logo from '../images/cookLogo_versao.png';
 
 export default function Header(props) {
   const { title, visibility, headleSearchBar } = props;
@@ -10,6 +11,10 @@ export default function Header(props) {
   const profile = () => {
     history.push('/perfil');
   };
+
+  const imageLogo = (
+    <img src={ logo } alt="logo" width="40px" className="img-logo" />
+  );
 
   return (
     <div className="container-header">
@@ -27,7 +32,7 @@ export default function Header(props) {
         >
           <i className="fas fa-search" />
         </button>
-      ) : null }
+      ) : imageLogo }
     </div>
   );
 }

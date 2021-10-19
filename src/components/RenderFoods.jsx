@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory as UseHistory, Link } from 'react-router-dom';
+import { Image, Grid, Segment } from 'semantic-ui-react';
 import MyConText from '../context/Context';
 import './RecipeCard.css';
 
@@ -24,7 +25,25 @@ export default function RenderFoods() {
     if (index < TWELVE) {
       return (
         <Link to={ `/comidas/${idMeal}` }>
-          <div
+          <Grid columns={ 1 }>
+            <Grid.Column>
+              <Segment padded compact>
+                <Image
+                  fluid
+                  label={ {
+                    as: 'a',
+                    color: 'black',
+                    content: strMeal,
+                    icon: 'spoon',
+                    ribbon: true,
+                    size: 'big',
+                  } }
+                  src={ strMealThumb }
+                />
+              </Segment>
+            </Grid.Column>
+          </Grid>
+          {/* <div
             className="recipeCard"
             data-testid={ `${index}-recipe-card` }
             key={ index }
@@ -39,7 +58,7 @@ export default function RenderFoods() {
             >
               { strMeal }
             </h4>
-          </div>
+          </div> */}
         </Link>
       );
     }

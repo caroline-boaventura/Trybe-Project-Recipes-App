@@ -26,61 +26,73 @@ export default function FavoriteRecipeCard({ localStorageValue, removeRecipes })
 
     <div>
       {localStorageValue && localStorageValue.map((recipes, index) => (
-        <div key={ recipes.name }>
-          <Link
-            to={ (recipes.type === 'comida')
-              ? `/comidas/${recipes.id}` : `/bebidas/${recipes.id}` }
-          >
-            <img
-              alt={ `foto de ${recipes.name}` }
-              data-testid={ `${index}-horizontal-image` }
-              src={ recipes.image }
-              style={ { width: '200px', height: '200px' } }
-            />
-          </Link>
-          <button
-            type="button"
-            onClick={ () => removeRecipes(recipes.name) }
-          >
-            <img
-              src={ blackHeartIcon }
-              alt="botão de desfavoritar"
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />
-          </button>
-          <button
-            type="button"
-            onClick={ () => copyLink(recipes.id, recipes.type) }
-          >
-            <img
-              alt="compartilhar"
-              src={ shareIcon }
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </button>
-          {copied && <span>Link copiado!</span>}
-          <p data-testid={ `${index}-horizontal-top-text` }>
-            {recipes.type === 'comida'
-              ? `${recipes.area} - ${recipes.category}`
-              : recipes.alcoholicOrNot}
-          </p>
-          <Link
-            to={ (recipes.type === 'comida')
-              ? `/comidas/${recipes.id}`
-              : `/bebidas/${recipes.id}` }
-          >
-            <p data-testid={ `${index}-horizontal-name` }>{recipes.name}</p>
-          </Link>
-
-          {recipes.tags && recipes.tags.map((tagName) => (
-            <span
-              data-testid={ `${index}-${tagName}-horizontal-tag` }
-              key={ `${tagName}-span` }
+        <div className="container-recipe-done" key={ recipes.name }>
+          <div>
+            <Link
+              to={ (recipes.type === 'comida')
+                ? `/comidas/${recipes.id}` : `/bebidas/${recipes.id}` }
             >
-              {tagName}
-            </span>
-          ))}
+              <img
+                alt={ `foto de ${recipes.name}` }
+                data-testid={ `${index}-horizontal-image` }
+                src={ recipes.image }
+                style={ { width: '150px', height: '150px' } }
+              />
+            </Link>
+          </div>
+          <div>
+            <div className="container-shade-favorite">
+              <button
+                type="button"
+                className="button-share"
+                onClick={ () => removeRecipes(recipes.name) }
+              >
+                <img
+                  src={ blackHeartIcon }
+                  alt="botão de desfavoritar"
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                />
+              </button>
+              <button
+                type="button"
+                className="button-share"
+                onClick={ () => copyLink(recipes.id, recipes.type) }
+              >
+                <img
+                  alt="compartilhar"
+                  src={ shareIcon }
+                  data-testid={ `${index}-horizontal-share-btn` }
+                />
+              </button>
+            </div>
+            {copied && <span className="link">Link copiado!</span>}
+            <p className="data-finish" data-testid={ `${index}-horizontal-top-text` }>
+              {recipes.type === 'comida'
+                ? `${recipes.area} - ${recipes.category}`
+                : recipes.alcoholicOrNot}
+            </p>
+            <Link
+              to={ (recipes.type === 'comida')
+                ? `/comidas/${recipes.id}`
+                : `/bebidas/${recipes.id}` }
+            >
+              <p
+                className="title-done"
+                data-testid={ `${index}-horizontal-name` }
+              >
+                {recipes.name}
+              </p>
+            </Link>
 
+            {recipes.tags && recipes.tags.map((tagName) => (
+              <span
+                data-testid={ `${index}-${tagName}-horizontal-tag` }
+                key={ `${tagName}-span` }
+              >
+                {tagName}
+              </span>
+            ))}
+          </div>
         </div>
       ))}
     </div>

@@ -47,7 +47,7 @@ export default function ButtonStartRecipe(props) {
       type="button"
       data-testid="start-recipe-btn"
       id="start-button"
-      className={ `footer ${classNameButton}` }
+      className={ `footer ${classNameButton} button-start` }
       onClick={ redirectInProgress }
     >
       Iniciar Receita
