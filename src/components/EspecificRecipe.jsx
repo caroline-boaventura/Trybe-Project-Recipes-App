@@ -7,6 +7,7 @@ import MyConText from '../context/Context';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './RecipeCard.css';
+import '../pages/index.css';
 
 const copy = require('clipboard-copy');
 
@@ -30,16 +31,22 @@ export default function EspecificRecipe(props) {
     fetchRecipeId();
   }, [id]);
 
-  const videoYoutube = () => (
-    <iframe
-      data-testid="video"
-      title="Recipe"
-      width="340"
-      height="315"
-      src={ especificRecipe.strYoutube }
-      allowfull
-    />
-  );
+  const videoYoutube = () => {
+    if (especificRecipe.strYoutube) {
+      const split = especificRecipe.strYoutube.split('watch?v=');
+      const newUrl = `${split[0]}embed/${split[1]}`;
+      return (
+        <iframe
+          className="youtube"
+          data-testid="video"
+          title="Recipe"
+          width="360"
+          height="220"
+          src={ newUrl }
+        />
+      );
+    }
+  };
 
   const category = () => {
     if (food) {
@@ -124,11 +131,11 @@ export default function EspecificRecipe(props) {
         width="360"
       />
       <div>
-        <div>
+        <div className="container-title">
           <h1 data-testid="recipe-title">{ especificRecipe[`str${imgAndTitle}`] }</h1>
           { category() }
         </div>
-        <div>
+        <div className="container-share">
           <button type="button" onClick={ handleShareButton }>
             <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
           </button>
@@ -138,14 +145,14 @@ export default function EspecificRecipe(props) {
           >
             <img data-testid="favorite-btn" src={ buttonClicked } alt="favorite-icon" />
           </button>
-          <div className={ divShare }>Link copiado!</div>
         </div>
+        <div className={ `${divShare} link` }>Link copiado!</div>
       </div>
-      <div>
+      <div className="container-indredients">
         <h2>Ingredients</h2>
         <Ingredients ingredientsList={ especificRecipe } />
       </div>
-      <div width="360">
+      <div width="360" className="container-instructions">
         <h2>Instructions</h2>
         <p data-testid="instructions">{ especificRecipe.strInstructions }</p>
       </div>

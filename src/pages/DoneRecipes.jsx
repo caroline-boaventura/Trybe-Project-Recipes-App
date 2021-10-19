@@ -28,7 +28,7 @@ export default function DoneRecipes() {
   return (
     <>
       <Header title="Receitas Feitas" visibility={ false } />
-      <div>
+      <div className="container-buttons">
         <button
           type="button"
           data-testid="filter-by-all-btn"

@@ -3,6 +3,7 @@ import copytoclipboard from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
+import '../pages/index.css';
 
 export default function RecipeCardDone({ localStorageValue }) {
   const [copied, setCopied] = useState(false);
@@ -40,53 +41,69 @@ export default function RecipeCardDone({ localStorageValue }) {
   return (
     <div>
       {localStorageValue && localStorageValue.map((index, teste) => (
-        <div key={ index.name }>
-          <Link
-            to={ (index.type === 'comida')
-              ? `/comidas/${index.id}` : `/bebidas/${index.id}` }
-          >
-            <img
-              alt={ `foto de ${index.name}` }
-              data-testid={ `${teste}-horizontal-image` }
-              src={ index.image }
-              style={ { width: '200px', height: '200px' } }
-            />
-          </Link>
-          <button
-            type="button"
-            onClick={ () => copyLink(index.id, index.type) }
-          >
-            <img
-              alt="compartilhar"
-              src={ shareIcon }
-              data-testid={ `${teste}-horizontal-share-btn` }
-            />
-          </button>
-          {copied && <span>Link copiado!</span>}
-          <p data-testid={ `${teste}-horizontal-top-text` }>
-            {index.type === 'comida'
-              ? `${index.area} - ${index.category}`
-              : index.alcoholicOrNot}
-          </p>
-          <Link
-            to={ (index.type === 'comida')
-              ? `/comidas/${index.id}`
-              : `/bebidas/${index.id}` }
-          >
-            <p data-testid={ `${teste}-horizontal-name` }>{index.name}</p>
-          </Link>
-
-          <p data-testid={ `${teste}-horizontal-done-date` }>{index.doneDate}</p>
-
-          {index.tags && index.tags.map((tagName) => (
-            <span
-              data-testid={ `${teste}-${tagName}-horizontal-tag` }
-              key={ `${tagName}-span` }
+        <div key={ index.name } className="container-recipe-done">
+          <div>
+            <Link
+              to={ (index.type === 'comida')
+                ? `/comidas/${index.id}` : `/bebidas/${index.id}` }
             >
-              {tagName}
-            </span>
-          ))}
-
+              <img
+                className="img-recipe-done"
+                alt={ `foto de ${index.name}` }
+                data-testid={ `${teste}-horizontal-image` }
+                src={ index.image }
+                style={ { width: '150px', height: '150px' } }
+              />
+            </Link>
+          </div>
+          <div>
+            <div className="container-shade-category">
+              <p data-testid={ `${teste}-horizontal-top-text` }>
+                {index.type === 'comida'
+                  ? `${index.area} - ${index.category}`
+                  : index.alcoholicOrNot}
+              </p>
+              <button
+                type="button"
+                className="button-share"
+                onClick={ () => copyLink(index.id, index.type) }
+              >
+                <img
+                  alt="compartilhar"
+                  src={ shareIcon }
+                  data-testid={ `${teste}-horizontal-share-btn` }
+                />
+              </button>
+            </div>
+            {copied && <span className="link">Link copiado!</span>}
+            <Link
+              to={ (index.type === 'comida')
+                ? `/comidas/${index.id}`
+                : `/bebidas/${index.id}` }
+            >
+              <p
+                data-testid={ `${teste}-horizontal-name` }
+                className="title-done"
+              >
+                {index.name}
+              </p>
+            </Link>
+            <p
+              data-testid={ `${teste}-horizontal-done-date` }
+              className="data-finish"
+            >
+              { `Feita em: ${index.doneDate}` }
+            </p>
+            {index.tags && index.tags.map((tagName) => (
+              <span
+                className="span-recipe"
+                data-testid={ `${teste}-${tagName}-horizontal-tag` }
+                key={ `${tagName}-span` }
+              >
+                {tagName}
+              </span>
+            ))}
+          </div>
         </div>
       ))}
     </div>

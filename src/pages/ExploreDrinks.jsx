@@ -19,22 +19,24 @@ export default function ExploreDrinks() {
   return (
     <div>
       <Header title="Explorar Bebidas" visibility={ false } />
-      <Link
-        to="/explorar/bebidas/ingredientes"
-      >
-        <button
-          data-testid="explore-by-ingredient"
-          type="button"
+      <div className="container-buttons-explore">
+        <Link
+          to="/explorar/bebidas/ingredientes"
         >
-          Por Ingredientes
+          <button
+            data-testid="explore-by-ingredient"
+            type="button"
+          >
+            Por Ingredientes
 
-        </button>
-      </Link>
-      <Link
-        to={ `/bebidas/${idbebida}` }
-      >
-        <button data-testid="explore-surprise" type="button">Me Surpreenda!</button>
-      </Link>
+          </button>
+        </Link>
+        <Link
+          to={ `/bebidas/${idbebida}` }
+        >
+          <button data-testid="explore-surprise" type="button">Me Surpreenda!</button>
+        </Link>
+      </div>
       <Footer />
     </div>
   );

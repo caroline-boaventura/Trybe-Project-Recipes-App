@@ -96,7 +96,7 @@ export default function IngredientsInProgress(props) {
       { mapIngredientsInProgress().map((ingredient, index) => {
         if (ingredient[0]) {
           return (
-            <div>
+            <div className="input-checkbok">
               <label
                 htmlFor={ ingredient[0] }
                 key={ index }
@@ -108,6 +108,7 @@ export default function IngredientsInProgress(props) {
                   value={ ingredient[0] }
                   onClick={ (event) => handleClassName(event) }
                 />
+                <span />
                 { `${ingredient[0]} - ${ingredient[1]}` }
               </label>
             </div>
